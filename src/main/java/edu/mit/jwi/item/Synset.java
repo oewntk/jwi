@@ -116,7 +116,7 @@ public class Synset implements ISynset
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IItem#getID()
+	 * @see edu.edu.mit.jwi.item.IItem#getID()
 	 */
 	public ISynsetID getID()
 	{
@@ -126,7 +126,7 @@ public class Synset implements ISynset
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.ISynset#getOffset()
+	 * @see edu.edu.mit.jwi.item.ISynset#getOffset()
 	 */
 	public int getOffset()
 	{
@@ -136,7 +136,7 @@ public class Synset implements ISynset
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IHasPOS#getPOS()
+	 * @see edu.edu.mit.jwi.item.IHasPOS#getPOS()
 	 */
 	public POS getPOS()
 	{
@@ -154,7 +154,7 @@ public class Synset implements ISynset
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.ISynset#getGloss()
+	 * @see edu.edu.mit.jwi.item.ISynset#getGloss()
 	 */
 	public String getGloss()
 	{
@@ -164,7 +164,7 @@ public class Synset implements ISynset
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.ISynset#getWords()
+	 * @see edu.edu.mit.jwi.item.ISynset#getWords()
 	 */
 	public List<IWord> getWords()
 	{
@@ -174,7 +174,7 @@ public class Synset implements ISynset
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.ISynset#getWord(int)
+	 * @see edu.edu.mit.jwi.item.ISynset#getWord(int)
 	 */
 	public IWord getWord(int wordNumber)
 	{
@@ -184,7 +184,7 @@ public class Synset implements ISynset
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.ISynset#getLexicalFile()
+	 * @see edu.edu.mit.jwi.item.ISynset#getLexicalFile()
 	 */
 	public ILexFile getLexicalFile()
 	{
@@ -194,7 +194,7 @@ public class Synset implements ISynset
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.ISynset#getRelatedMap()
+	 * @see edu.edu.mit.jwi.item.ISynset#getRelatedMap()
 	 */
 	public Map<IPointer, List<ISynsetID>> getRelatedMap()
 	{
@@ -204,7 +204,7 @@ public class Synset implements ISynset
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.ISynset#getRelatedSynsets(edu.mit.jwi.item.IPointer)
+	 * @see edu.edu.mit.jwi.item.ISynset#getRelatedSynsets(edu.edu.mit.jwi.item.IPointer)
 	 */
 	public List<ISynsetID> getRelatedSynsets(IPointer type)
 	{
@@ -217,7 +217,7 @@ public class Synset implements ISynset
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.ISynset#getRelatedSynsets()
+	 * @see edu.edu.mit.jwi.item.ISynset#getRelatedSynsets()
 	 */
 	public List<ISynsetID> getRelatedSynsets()
 	{
@@ -227,7 +227,7 @@ public class Synset implements ISynset
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.ISynset#isAdjectiveSatellite()
+	 * @see edu.edu.mit.jwi.item.ISynset#isAdjectiveSatellite()
 	 */
 	public boolean isAdjectiveSatellite()
 	{
@@ -237,7 +237,7 @@ public class Synset implements ISynset
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.ISynset#isAdjectiveHead()
+	 * @see edu.edu.mit.jwi.item.ISynset#isAdjectiveHead()
 	 */
 	public boolean isAdjectiveHead()
 	{
@@ -442,7 +442,7 @@ public class Synset implements ISynset
 		/*
 		 * (non-Javadoc)
 		 *
-		 * @see edu.mit.jwi.item.Synset.IWordBuilder#addRelatedWord(edu.mit.jwi.item.IPointer, edu.mit.jwi.item.IWordID)
+		 * @see edu.edu.mit.jwi.item.Synset.IWordBuilder#addRelatedWord(edu.edu.mit.jwi.item.IPointer, edu.edu.mit.jwi.item.IWordID)
 		 */
 		public void addRelatedWord(IPointer type, IWordID id)
 		{
@@ -457,7 +457,7 @@ public class Synset implements ISynset
 		/*
 		 * (non-Javadoc)
 		 *
-		 * @see edu.mit.jwi.item.Synset.IWordBuilder#addVerbFrame(edu.mit.jwi.item.IVerbFrame)
+		 * @see edu.edu.mit.jwi.item.Synset.IWordBuilder#addVerbFrame(edu.edu.mit.jwi.item.IVerbFrame)
 		 */
 		public void addVerbFrame(IVerbFrame frame)
 		{
@@ -469,7 +469,7 @@ public class Synset implements ISynset
 		/*
 		 * (non-Javadoc)
 		 *
-		 * @see edu.mit.jwi.item.Synset.IWordBuilder#toWord(edu.mit.jwi.item.ISynset)
+		 * @see edu.edu.mit.jwi.item.Synset.IWordBuilder#toWord(edu.edu.mit.jwi.item.ISynset)
 		 */
 		public IWord toWord(ISynset synset)
 		{

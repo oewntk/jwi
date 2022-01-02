@@ -59,7 +59,7 @@ public class SenseEntry implements ISenseEntry
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.ISenseEntry#getOffset()
+	 * @see edu.edu.mit.jwi.item.ISenseEntry#getOffset()
 	 */
 	public int getOffset()
 	{
@@ -69,7 +69,7 @@ public class SenseEntry implements ISenseEntry
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IHasPOS#getPOS()
+	 * @see edu.edu.mit.jwi.item.IHasPOS#getPOS()
 	 */
 	public POS getPOS()
 	{
@@ -79,7 +79,7 @@ public class SenseEntry implements ISenseEntry
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.ISenseEntry#getSenseNumber()
+	 * @see edu.edu.mit.jwi.item.ISenseEntry#getSenseNumber()
 	 */
 	public int getSenseNumber()
 	{
@@ -89,7 +89,7 @@ public class SenseEntry implements ISenseEntry
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.ISenseEntry#getSenseKey()
+	 * @see edu.edu.mit.jwi.item.ISenseEntry#getSenseKey()
 	 */
 	public ISenseKey getSenseKey()
 	{
@@ -99,7 +99,7 @@ public class SenseEntry implements ISenseEntry
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.ISenseEntry#getTagCount()
+	 * @see edu.edu.mit.jwi.item.ISenseEntry#getTagCount()
 	 */
 	public int getTagCount()
 	{

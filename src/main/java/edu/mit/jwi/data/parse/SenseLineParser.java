@@ -81,7 +81,7 @@ public class SenseLineParser implements ILineParser<ISenseEntry>
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.data.parse.ILineParser#parseLine(java.lang.String)
+	 * @see edu.edu.mit.jwi.data.parse.ILineParser#parseLine(java.lang.String)
 	 */
 	public ISenseEntry parseLine(String line)
 	{

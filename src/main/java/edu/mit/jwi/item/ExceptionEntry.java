@@ -73,7 +73,7 @@ public class ExceptionEntry extends ExceptionEntryProxy implements IExceptionEnt
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IHasPOS#getPOS()
+	 * @see edu.edu.mit.jwi.item.IHasPOS#getPOS()
 	 */
 	public POS getPOS()
 	{
@@ -83,7 +83,7 @@ public class ExceptionEntry extends ExceptionEntryProxy implements IExceptionEnt
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IItem#getID()
+	 * @see edu.edu.mit.jwi.item.IItem#getID()
 	 */
 	public IExceptionEntryID getID()
 	{
@@ -93,7 +93,7 @@ public class ExceptionEntry extends ExceptionEntryProxy implements IExceptionEnt
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.ExceptionEntryProxy#toString()
+	 * @see edu.edu.mit.jwi.item.ExceptionEntryProxy#toString()
 	 */
 	public String toString()
 	{

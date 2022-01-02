@@ -158,7 +158,7 @@ public class SimpleStemmer implements IStemmer
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.morph.IStemmer#findStems(java.lang.String, edu.mit.jwi.item.POS)
+	 * @see edu.edu.mit.jwi.morph.IStemmer#findStems(java.lang.String, edu.edu.mit.jwi.item.POS)
 	 */
 	public List<String> findStems(String word, POS pos)
 	{

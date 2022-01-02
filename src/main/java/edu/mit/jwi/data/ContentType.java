@@ -109,7 +109,7 @@ public class ContentType<T> implements IContentType<T>
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.data.IContentType#getDataType()
+	 * @see edu.edu.mit.jwi.data.IContentType#getDataType()
 	 */
 	public IDataType<T> getDataType()
 	{
@@ -119,7 +119,7 @@ public class ContentType<T> implements IContentType<T>
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IHasPOS#getPOS()
+	 * @see edu.edu.mit.jwi.item.IHasPOS#getPOS()
 	 */
 	public POS getPOS()
 	{
@@ -129,7 +129,7 @@ public class ContentType<T> implements IContentType<T>
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.data.IContentType#getLineComparator()
+	 * @see edu.edu.mit.jwi.data.IContentType#getLineComparator()
 	 */
 	public ILineComparator getLineComparator()
 	{
@@ -139,7 +139,7 @@ public class ContentType<T> implements IContentType<T>
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.data.IHasCharset#getCharset()
+	 * @see edu.edu.mit.jwi.data.IHasCharset#getCharset()
 	 */
 	public Charset getCharset()
 	{

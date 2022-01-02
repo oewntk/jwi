@@ -65,7 +65,7 @@ public class IndexWordID implements IIndexWordID
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IIndexWordID#getLemma()
+	 * @see edu.edu.mit.jwi.item.IIndexWordID#getLemma()
 	 */
 	public String getLemma()
 	{
@@ -75,7 +75,7 @@ public class IndexWordID implements IIndexWordID
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IHasPOS#getPOS()
+	 * @see edu.edu.mit.jwi.item.IHasPOS#getPOS()
 	 */
 	public POS getPOS()
 	{

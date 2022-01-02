@@ -61,7 +61,7 @@ public class WordnetStemmer extends SimpleStemmer
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.morph.SimpleStemmer#findStems(java.lang.String, edu.mit.jwi.item.POS)
+	 * @see edu.edu.mit.jwi.morph.SimpleStemmer#findStems(java.lang.String, edu.edu.mit.jwi.item.POS)
 	 */
 	public List<String> findStems(String word, POS pos)
 	{

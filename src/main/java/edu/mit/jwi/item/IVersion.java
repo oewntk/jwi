@@ -75,7 +75,7 @@ public interface IVersion extends Serializable
 		/*
 		 * (non-Javadoc)
 		 *
-		 * @see edu.mit.jwi.item.IVersion#getBugfixVersion()
+		 * @see edu.edu.mit.jwi.item.IVersion#getBugfixVersion()
 		 */
 		public int getBugfixVersion()
 		{
@@ -85,7 +85,7 @@ public interface IVersion extends Serializable
 		/*
 		 * (non-Javadoc)
 		 *
-		 * @see edu.mit.jwi.item.IVersion#getMajorVersion()
+		 * @see edu.edu.mit.jwi.item.IVersion#getMajorVersion()
 		 */
 		public int getMajorVersion()
 		{
@@ -95,7 +95,7 @@ public interface IVersion extends Serializable
 		/*
 		 * (non-Javadoc)
 		 *
-		 * @see edu.mit.jwi.item.IVersion#getMinorVersion()
+		 * @see edu.edu.mit.jwi.item.IVersion#getMinorVersion()
 		 */
 		public int getMinorVersion()
 		{
@@ -105,7 +105,7 @@ public interface IVersion extends Serializable
 		/*
 		 * (non-Javadoc)
 		 *
-		 * @see edu.mit.jwi.item.IVersion#getQualifier()
+		 * @see edu.edu.mit.jwi.item.IVersion#getQualifier()
 		 */
 		public String getQualifier()
 		{

@@ -10,11 +10,11 @@
 
 package edu.mit.jwi.data.parse;
 
+import java.util.*;
+
 import edu.mit.jwi.item.*;
 import edu.mit.jwi.item.Synset.IWordBuilder;
 import edu.mit.jwi.item.Synset.WordBuilder;
-
-import java.util.*;
 
 /**
  * <p>
@@ -48,7 +48,9 @@ public class DataLineParser implements ILineParser<ISynset>
 	public static DataLineParser getInstance()
 	{
 		if (instance == null)
+		{
 			instance = new DataLineParser();
+		}
 		return instance;
 	}
 
@@ -66,12 +68,14 @@ public class DataLineParser implements ILineParser<ISynset>
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.data.parse.ILineParser#parseLine(java.lang.String)
+	 * @see edu.edu.mit.jwi.data.parse.ILineParser#parseLine(java.lang.String)
 	 */
 	public ISynset parseLine(String line)
 	{
 		if (line == null)
+		{
 			throw new NullPointerException();
+		}
 
 		try
 		{
@@ -119,6 +123,7 @@ public class DataLineParser implements ILineParser<ISynset>
 				// if it is an adjective, it may be followed by a marker
 				marker = null;
 				if (synset_pos == POS.ADJECTIVE)
+				{
 					for (AdjMarker adjMarker : AdjMarker.values())
 					{
 						if (lemma.endsWith(adjMarker.getSymbol()))
@@ -127,6 +132,7 @@ public class DataLineParser implements ILineParser<ISynset>
 							lemma = lemma.substring(0, lemma.length() - adjMarker.getSymbol().length());
 						}
 					}
+				}
 
 				// parse lex_id
 				lexID = Integer.parseInt(tokenizer.nextToken(), 16);
@@ -168,7 +174,9 @@ public class DataLineParser implements ILineParser<ISynset>
 				if (source_target_num == 0)
 				{
 					if (synsetPointerMap == null)
+					{
 						synsetPointerMap = new HashMap<>();
+					}
 					pointerList = synsetPointerMap.computeIfAbsent(pointer_type, k -> new ArrayList<>());
 					pointerList.add(target_synset_id);
 				}
@@ -184,8 +192,12 @@ public class DataLineParser implements ILineParser<ISynset>
 
 			// trim pointer lists
 			if (synsetPointerMap != null)
+			{
 				for (ArrayList<ISynsetID> list : synsetPointerMap.values())
+				{
 					list.trimToSize();
+				}
+			}
 
 			// parse verb frames
 			if (synset_pos == POS.VERB)
@@ -203,11 +215,15 @@ public class DataLineParser implements ILineParser<ISynset>
 					// Get word number
 					word_num = Integer.parseInt(tokenizer.nextToken(), 16);
 					if (word_num > 0)
+					{
 						wordProxies[word_num - 1].addVerbFrame(frame);
+					}
 					else
 					{
 						for (IWordBuilder proxy : wordProxies)
+						{
 							proxy.addVerbFrame(frame);
+						}
 					}
 				}
 			}
@@ -216,7 +232,9 @@ public class DataLineParser implements ILineParser<ISynset>
 			String gloss = "";
 			int index = line.indexOf('|');
 			if (index > 0)
+			{
 				gloss = line.substring(index + 2).trim();
+			}
 
 			// create synset and words
 			List<IWordBuilder> words = Arrays.asList(wordProxies);
@@ -265,7 +283,9 @@ public class DataLineParser implements ILineParser<ISynset>
 	{
 		ILexFile lexFile = LexFile.getLexicalFile(lexFileNum);
 		if (lexFile == null)
+		{
 			lexFile = UnknownLexFile.getUnknownLexicalFile(lexFileNum);
+		}
 		return lexFile;
 	}
 

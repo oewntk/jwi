@@ -184,7 +184,7 @@ public class FileProvider implements IDataProvider, ILoadable, ILoadPolicy
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.data.IDataProvider#getSource()
+	 * @see edu.edu.mit.jwi.data.IDataProvider#getSource()
 	 */
 	public URL getSource()
 	{
@@ -194,7 +194,7 @@ public class FileProvider implements IDataProvider, ILoadable, ILoadPolicy
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.data.ILoadPolicy#getLoadPolicy()
+	 * @see edu.edu.mit.jwi.data.ILoadPolicy#getLoadPolicy()
 	 */
 	public int getLoadPolicy()
 	{
@@ -204,7 +204,7 @@ public class FileProvider implements IDataProvider, ILoadable, ILoadPolicy
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.data.IDataProvider#setSource(java.net.URL)
+	 * @see edu.edu.mit.jwi.data.IDataProvider#setSource(java.net.URL)
 	 */
 	public void setSource(URL url)
 	{
@@ -218,7 +218,7 @@ public class FileProvider implements IDataProvider, ILoadable, ILoadPolicy
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.data.ILoadPolicy#setLoadPolicy(int)
+	 * @see edu.edu.mit.jwi.data.ILoadPolicy#setLoadPolicy(int)
 	 */
 	public void setLoadPolicy(int policy)
 	{
@@ -236,7 +236,7 @@ public class FileProvider implements IDataProvider, ILoadable, ILoadPolicy
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IHasVersion#getVersion()
+	 * @see edu.edu.mit.jwi.item.IHasVersion#getVersion()
 	 */
 	public IVersion getVersion()
 	{
@@ -283,7 +283,7 @@ public class FileProvider implements IDataProvider, ILoadable, ILoadPolicy
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.data.IHasCharset#getCharset()
+	 * @see edu.edu.mit.jwi.data.IHasCharset#getCharset()
 	 */
 	public Charset getCharset()
 	{
@@ -294,7 +294,7 @@ public class FileProvider implements IDataProvider, ILoadable, ILoadPolicy
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.data.IDataProvider#setCharset(java.nio.charset.Charset)
+	 * @see edu.edu.mit.jwi.data.IDataProvider#setCharset(java.nio.charset.Charset)
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" }) public void setCharset(Charset charset)
 	{
@@ -326,7 +326,7 @@ public class FileProvider implements IDataProvider, ILoadable, ILoadPolicy
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.data.IDataProvider#resolveContentType(edu.mit.jwi.data.IDataType, edu.mit.jwi.item.POS)
+	 * @see edu.edu.mit.jwi.data.IDataProvider#resolveContentType(edu.edu.mit.jwi.data.IDataType, edu.edu.mit.jwi.item.POS)
 	 */
 	@SuppressWarnings("unchecked") public <T> IContentType<T> resolveContentType(IDataType<T> dt, POS pos)
 	{
@@ -339,7 +339,7 @@ public class FileProvider implements IDataProvider, ILoadable, ILoadPolicy
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.data.IHasLifecycle#open()
+	 * @see edu.edu.mit.jwi.data.IHasLifecycle#open()
 	 */
 	public boolean open() throws IOException
 	{
@@ -406,7 +406,7 @@ public class FileProvider implements IDataProvider, ILoadable, ILoadPolicy
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.data.ILoadable#load()
+	 * @see edu.edu.mit.jwi.data.ILoadable#load()
 	 */
 	public void load()
 	{
@@ -423,7 +423,7 @@ public class FileProvider implements IDataProvider, ILoadable, ILoadPolicy
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.data.ILoadable#load(boolean)
+	 * @see edu.edu.mit.jwi.data.ILoadable#load(boolean)
 	 */
 	public void load(boolean block) throws InterruptedException
 	{
@@ -449,7 +449,7 @@ public class FileProvider implements IDataProvider, ILoadable, ILoadPolicy
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.data.ILoadable#isLoaded()
+	 * @see edu.edu.mit.jwi.data.ILoadable#isLoaded()
 	 */
 	public boolean isLoaded()
 	{
@@ -608,7 +608,7 @@ public class FileProvider implements IDataProvider, ILoadable, ILoadPolicy
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.data.IHasLifecycle#isOpen()
+	 * @see edu.edu.mit.jwi.data.IHasLifecycle#isOpen()
 	 */
 	public boolean isOpen()
 	{
@@ -626,7 +626,7 @@ public class FileProvider implements IDataProvider, ILoadable, ILoadPolicy
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.data.IClosable#close()
+	 * @see edu.edu.mit.jwi.data.IClosable#close()
 	 */
 	public void close()
 	{
@@ -662,7 +662,7 @@ public class FileProvider implements IDataProvider, ILoadable, ILoadPolicy
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.data.IDataProvider#getSource(edu.mit.jwi.data.IContentType)
+	 * @see edu.edu.mit.jwi.data.IDataProvider#getSource(edu.edu.mit.jwi.data.IContentType)
 	 */
 	// no way to safely cast; must rely on registerSource method to assure compliance
 	@SuppressWarnings("unchecked") public <T> ILoadableDataSource<T> getSource(IContentType<T> type)
@@ -681,7 +681,7 @@ public class FileProvider implements IDataProvider, ILoadable, ILoadPolicy
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.data.IDataProvider#getTypes()
+	 * @see edu.edu.mit.jwi.data.IDataProvider#getTypes()
 	 */
 	public Set<? extends IContentType<?>> getTypes()
 	{

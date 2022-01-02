@@ -58,7 +58,7 @@ public class ExceptionEntryID implements IExceptionEntryID
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IExceptionEntryID#getSurfaceForm()
+	 * @see edu.edu.mit.jwi.item.IExceptionEntryID#getSurfaceForm()
 	 */
 	public String getSurfaceForm()
 	{
@@ -68,7 +68,7 @@ public class ExceptionEntryID implements IExceptionEntryID
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IHasPOS#getPOS()
+	 * @see edu.edu.mit.jwi.item.IHasPOS#getPOS()
 	 */
 	public POS getPOS()
 	{

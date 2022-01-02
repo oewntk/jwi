@@ -69,6 +69,10 @@ public class VerbFrame implements IVerbFrame
 	public static final VerbFrame NUM_33 = new VerbFrame(33, "Somebody ----s VERB-ing");
 	public static final VerbFrame NUM_34 = new VerbFrame(34, "It ----s that CLAUSE");
 	public static final VerbFrame NUM_35 = new VerbFrame(35, "Something ----s INFINITIVE");
+	public static final VerbFrame NUM_36 = new VerbFrame(36, "Somebody ----s at something");
+	public static final VerbFrame NUM_37 = new VerbFrame(37, "Somebody ----s for something");
+	public static final VerbFrame NUM_38 = new VerbFrame(38, "Somebody ----s on somebody");
+	public static final VerbFrame NUM_39 = new VerbFrame(39, "Somebody ----s out of somebody");
 
 	// final instance fields
 	private final int num;
@@ -90,7 +94,7 @@ public class VerbFrame implements IVerbFrame
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IVerbFrame#getNumber()
+	 * @see edu.edu.mit.jwi.item.IVerbFrame#getNumber()
 	 */
 	public int getNumber()
 	{
@@ -100,7 +104,7 @@ public class VerbFrame implements IVerbFrame
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IVerbFrame#getTemplate()
+	 * @see edu.edu.mit.jwi.item.IVerbFrame#getTemplate()
 	 */
 	public String getTemplate()
 	{
@@ -110,7 +114,7 @@ public class VerbFrame implements IVerbFrame
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IVerbFrame#instantiateTemplate(java.lang.String)
+	 * @see edu.edu.mit.jwi.item.IVerbFrame#instantiateTemplate(java.lang.String)
 	 */
 	public String instantiateTemplate(String verb)
 	{

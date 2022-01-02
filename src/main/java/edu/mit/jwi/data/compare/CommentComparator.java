@@ -91,7 +91,7 @@ public class CommentComparator implements Comparator<String>, ICommentDetector
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.data.compare.ICommentDetector#isCommentLine(java.lang.String)
+	 * @see edu.edu.mit.jwi.data.compare.ICommentDetector#isCommentLine(java.lang.String)
 	 */
 	public boolean isCommentLine(String line)
 	{

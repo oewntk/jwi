@@ -60,7 +60,7 @@ public class SynsetID implements ISynsetID
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.ISynsetID#getOffset()
+	 * @see edu.edu.mit.jwi.item.ISynsetID#getOffset()
 	 */
 	public int getOffset()
 	{
@@ -70,7 +70,7 @@ public class SynsetID implements ISynsetID
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IHasPOS#getPOS()
+	 * @see edu.edu.mit.jwi.item.IHasPOS#getPOS()
 	 */
 	public POS getPOS()
 	{

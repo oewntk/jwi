@@ -152,7 +152,7 @@ public class WordID implements IWordID
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IWordID#getSynsetID()
+	 * @see edu.edu.mit.jwi.item.IWordID#getSynsetID()
 	 */
 	public ISynsetID getSynsetID()
 	{
@@ -162,7 +162,7 @@ public class WordID implements IWordID
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IWordID#getWordNumber()
+	 * @see edu.edu.mit.jwi.item.IWordID#getWordNumber()
 	 */
 	public int getWordNumber()
 	{
@@ -172,7 +172,7 @@ public class WordID implements IWordID
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IWordID#getLemma()
+	 * @see edu.edu.mit.jwi.item.IWordID#getLemma()
 	 */
 	public String getLemma()
 	{
@@ -182,7 +182,7 @@ public class WordID implements IWordID
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IHasPOS#getPOS()
+	 * @see edu.edu.mit.jwi.item.IHasPOS#getPOS()
 	 */
 	public POS getPOS()
 	{

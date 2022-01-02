@@ -11,6 +11,7 @@
 package edu.mit.jwi.data;
 
 import java.io.File;
+import java.nio.Buffer;
 import java.nio.ByteBuffer;
 
 /**
@@ -48,7 +49,7 @@ public class DirectAccessWordnetFile<T> extends WordnetFile<T>
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.data.IDataSource#getLine(java.lang.String)
+	 * @see edu.edu.mit.jwi.data.IDataSource#getLine(java.lang.String)
 	 */
 	public String getLine(String key)
 	{
@@ -60,7 +61,7 @@ public class DirectAccessWordnetFile<T> extends WordnetFile<T>
 				int byteOffset = Integer.parseInt(key);
 				if (buffer.limit() <= byteOffset)
 					return null;
-				buffer.position(byteOffset);
+				((Buffer)buffer).position(byteOffset);
 				String line = getLine(buffer, getContentType().getCharset());
 				return line != null && line.startsWith(key) ? line : null;
 			}
@@ -74,7 +75,7 @@ public class DirectAccessWordnetFile<T> extends WordnetFile<T>
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.data.WordnetFile#makeIterator(java.nio.ByteBuffer, java.lang.String)
+	 * @see edu.edu.mit.jwi.data.WordnetFile#makeIterator(java.nio.ByteBuffer, java.lang.String)
 	 */
 	public LineIterator makeIterator(ByteBuffer buffer, String key)
 	{
@@ -112,7 +113,7 @@ public class DirectAccessWordnetFile<T> extends WordnetFile<T>
 		/*
 		 * (non-Javadoc)
 		 *
-		 * @see edu.mit.jwi.data.WordnetFile.LineIterator#findFirstLine(java.lang.String)
+		 * @see edu.edu.mit.jwi.data.WordnetFile.LineIterator#findFirstLine(java.lang.String)
 		 */
 		protected void findFirstLine(String key)
 		{
@@ -123,7 +124,7 @@ public class DirectAccessWordnetFile<T> extends WordnetFile<T>
 					int byteOffset = Integer.parseInt(key);
 					if (itrBuffer.limit() <= byteOffset)
 						return;
-					itrBuffer.position(byteOffset);
+					((Buffer)itrBuffer).position(byteOffset);
 					next = getLine(itrBuffer, getContentType().getCharset());
 				}
 				catch (NumberFormatException e)

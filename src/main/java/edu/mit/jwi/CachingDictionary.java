@@ -130,7 +130,7 @@ public class CachingDictionary implements ICachingDictionary
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.data.IHasCharset#getCharset()
+	 * @see edu.edu.mit.jwi.data.IHasCharset#getCharset()
 	 */
 	public Charset getCharset()
 	{
@@ -176,7 +176,7 @@ public class CachingDictionary implements ICachingDictionary
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IHasVersion#getVersion()
+	 * @see edu.edu.mit.jwi.item.IHasVersion#getVersion()
 	 */
 	public IVersion getVersion()
 	{
@@ -186,7 +186,7 @@ public class CachingDictionary implements ICachingDictionary
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.IDictionary#getIndexWord(java.lang.String, edu.mit.jwi.item.POS)
+	 * @see edu.mit.jwi.IDictionary#getIndexWord(java.lang.String, edu.edu.mit.jwi.item.POS)
 	 */
 	public IIndexWord getIndexWord(String lemma, POS pos)
 	{
@@ -205,7 +205,7 @@ public class CachingDictionary implements ICachingDictionary
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.IDictionary#getIndexWord(edu.mit.jwi.item.IIndexWordID)
+	 * @see edu.mit.jwi.IDictionary#getIndexWord(edu.edu.mit.jwi.item.IIndexWordID)
 	 */
 	public IIndexWord getIndexWord(IIndexWordID id)
 	{
@@ -223,7 +223,7 @@ public class CachingDictionary implements ICachingDictionary
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.IDictionary#getIndexWordIterator(edu.mit.jwi.item.POS)
+	 * @see edu.mit.jwi.IDictionary#getIndexWordIterator(edu.edu.mit.jwi.item.POS)
 	 */
 	public Iterator<IIndexWord> getIndexWordIterator(POS pos)
 	{
@@ -233,7 +233,7 @@ public class CachingDictionary implements ICachingDictionary
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.IDictionary#getWord(edu.mit.jwi.item.IWordID)
+	 * @see edu.mit.jwi.IDictionary#getWord(edu.edu.mit.jwi.item.IWordID)
 	 */
 	public IWord getWord(IWordID id)
 	{
@@ -251,7 +251,7 @@ public class CachingDictionary implements ICachingDictionary
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.IDictionary#getWord(edu.mit.jwi.item.ISenseKey)
+	 * @see edu.mit.jwi.IDictionary#getWord(edu.edu.mit.jwi.item.ISenseKey)
 	 */
 	public IWord getWord(ISenseKey key)
 	{
@@ -269,7 +269,7 @@ public class CachingDictionary implements ICachingDictionary
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.IDictionary#getSynset(edu.mit.jwi.item.ISynsetID)
+	 * @see edu.mit.jwi.IDictionary#getSynset(edu.edu.mit.jwi.item.ISynsetID)
 	 */
 	public ISynset getSynset(ISynsetID id)
 	{
@@ -305,7 +305,7 @@ public class CachingDictionary implements ICachingDictionary
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.IDictionary#getSynsetIterator(edu.mit.jwi.item.POS)
+	 * @see edu.mit.jwi.IDictionary#getSynsetIterator(edu.edu.mit.jwi.item.POS)
 	 */
 	public Iterator<ISynset> getSynsetIterator(POS pos)
 	{
@@ -315,7 +315,7 @@ public class CachingDictionary implements ICachingDictionary
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.IDictionary#getSenseEntry(edu.mit.jwi.item.ISenseKey)
+	 * @see edu.mit.jwi.IDictionary#getSenseEntry(edu.edu.mit.jwi.item.ISenseKey)
 	 */
 	public ISenseEntry getSenseEntry(ISenseKey key)
 	{
@@ -343,7 +343,7 @@ public class CachingDictionary implements ICachingDictionary
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.IDictionary#getExceptionEntry(java.lang.String, edu.mit.jwi.item.POS)
+	 * @see edu.mit.jwi.IDictionary#getExceptionEntry(java.lang.String, edu.edu.mit.jwi.item.POS)
 	 */
 	public IExceptionEntry getExceptionEntry(String surfaceForm, POS pos)
 	{
@@ -362,7 +362,7 @@ public class CachingDictionary implements ICachingDictionary
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.IDictionary#getExceptionEntry(edu.mit.jwi.item.IExceptionEntryID)
+	 * @see edu.mit.jwi.IDictionary#getExceptionEntry(edu.edu.mit.jwi.item.IExceptionEntryID)
 	 */
 	public IExceptionEntry getExceptionEntry(IExceptionEntryID id)
 	{
@@ -380,7 +380,7 @@ public class CachingDictionary implements ICachingDictionary
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.IDictionary#getExceptionEntryIterator(edu.mit.jwi.item.POS)
+	 * @see edu.mit.jwi.IDictionary#getExceptionEntryIterator(edu.edu.mit.jwi.item.POS)
 	 */
 	public Iterator<IExceptionEntry> getExceptionEntryIterator(POS pos)
 	{
@@ -455,7 +455,7 @@ public class CachingDictionary implements ICachingDictionary
 		/*
 		 * (non-Javadoc)
 		 *
-		 * @see edu.mit.jwi.data.IHasLifecycle#open()
+		 * @see edu.edu.mit.jwi.data.IHasLifecycle#open()
 		 */
 		public boolean open()
 		{
@@ -493,7 +493,7 @@ public class CachingDictionary implements ICachingDictionary
 		/*
 		 * (non-Javadoc)
 		 *
-		 * @see edu.mit.jwi.data.IHasLifecycle#isOpen()
+		 * @see edu.edu.mit.jwi.data.IHasLifecycle#isOpen()
 		 */
 		public boolean isOpen()
 		{
@@ -518,7 +518,7 @@ public class CachingDictionary implements ICachingDictionary
 		/*
 		 * (non-Javadoc)
 		 *
-		 * @see edu.mit.jwi.data.IClosable#close()
+		 * @see edu.edu.mit.jwi.data.IClosable#close()
 		 */
 		public void close()
 		{
@@ -634,7 +634,7 @@ public class CachingDictionary implements ICachingDictionary
 		/*
 		 * (non-Javadoc)
 		 *
-		 * @see edu.mit.jwi.ICachingDictionary.IItemCache#cacheItem(edu.mit.jwi.item.IItem)
+		 * @see edu.mit.jwi.ICachingDictionary.IItemCache#cacheItem(edu.edu.mit.jwi.item.IItem)
 		 */
 		public void cacheItem(IItem<?> item)
 		{
@@ -648,7 +648,7 @@ public class CachingDictionary implements ICachingDictionary
 		/*
 		 * (non-Javadoc)
 		 *
-		 * @see edu.mit.jwi.ICachingDictionary.IItemCache#cacheWordByKey(edu.mit.jwi.item.IWord)
+		 * @see edu.mit.jwi.ICachingDictionary.IItemCache#cacheWordByKey(edu.edu.mit.jwi.item.IWord)
 		 */
 		public void cacheWordByKey(IWord word)
 		{
@@ -662,7 +662,7 @@ public class CachingDictionary implements ICachingDictionary
 		/*
 		 * (non-Javadoc)
 		 *
-		 * @see edu.mit.jwi.ICachingDictionary.IItemCache#cacheSenseEntry(edu.mit.jwi.item.ISenseEntry)
+		 * @see edu.mit.jwi.ICachingDictionary.IItemCache#cacheSenseEntry(edu.edu.mit.jwi.item.ISenseEntry)
 		 */
 		public void cacheSenseEntry(ISenseEntry entry)
 		{
@@ -702,7 +702,7 @@ public class CachingDictionary implements ICachingDictionary
 		/*
 		 * (non-Javadoc)
 		 *
-		 * @see edu.mit.jwi.ICachingDictionary.IItemCache#retrieveItem(edu.mit.jwi.item.IItemID)
+		 * @see edu.mit.jwi.ICachingDictionary.IItemCache#retrieveItem(edu.edu.mit.jwi.item.IItemID)
 		 */
 		public <T extends IItem<D>, D extends IItemID<T>> T retrieveItem(D id)
 		{
@@ -714,7 +714,7 @@ public class CachingDictionary implements ICachingDictionary
 		/*
 		 * (non-Javadoc)
 		 *
-		 * @see edu.mit.jwi.ICachingDictionary.IItemCache#retrieveWord(edu.mit.jwi.item.ISenseKey)
+		 * @see edu.mit.jwi.ICachingDictionary.IItemCache#retrieveWord(edu.edu.mit.jwi.item.ISenseKey)
 		 */
 		public IWord retrieveWord(ISenseKey key)
 		{
@@ -725,7 +725,7 @@ public class CachingDictionary implements ICachingDictionary
 		/*
 		 * (non-Javadoc)
 		 *
-		 * @see edu.mit.jwi.ICachingDictionary.IItemCache#retrieveSenseEntry(edu.mit.jwi.item.ISenseKey)
+		 * @see edu.mit.jwi.ICachingDictionary.IItemCache#retrieveSenseEntry(edu.edu.mit.jwi.item.ISenseKey)
 		 */
 		public ISenseEntry retrieveSenseEntry(ISenseKey key)
 		{

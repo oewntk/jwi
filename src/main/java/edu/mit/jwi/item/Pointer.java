@@ -93,7 +93,7 @@ public class Pointer implements IPointer
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IPointer#getSymbol()
+	 * @see edu.edu.mit.jwi.item.IPointer#getSymbol()
 	 */
 	public String getSymbol()
 	{
@@ -103,7 +103,7 @@ public class Pointer implements IPointer
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IPointer#getName()
+	 * @see edu.edu.mit.jwi.item.IPointer#getName()
 	 */
 	public String getName()
 	{

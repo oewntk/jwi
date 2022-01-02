@@ -110,7 +110,7 @@ public class IndexLineComparator implements ILineComparator
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.data.compare.ILineComparator#getCommentDetector()
+	 * @see edu.edu.mit.jwi.data.compare.ILineComparator#getCommentDetector()
 	 */
 	public ICommentDetector getCommentDetector()
 	{

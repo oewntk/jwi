@@ -118,7 +118,7 @@ public class Word implements IWord
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IItem#getID()
+	 * @see edu.edu.mit.jwi.item.IItem#getID()
 	 */
 	public IWordID getID()
 	{
@@ -128,7 +128,7 @@ public class Word implements IWord
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IWord#getLemma()
+	 * @see edu.edu.mit.jwi.item.IWord#getLemma()
 	 */
 	public String getLemma()
 	{
@@ -138,7 +138,7 @@ public class Word implements IWord
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IHasPOS#getPOS()
+	 * @see edu.edu.mit.jwi.item.IHasPOS#getPOS()
 	 */
 	public POS getPOS()
 	{
@@ -148,7 +148,7 @@ public class Word implements IWord
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IWord#getSynset()
+	 * @see edu.edu.mit.jwi.item.IWord#getSynset()
 	 */
 	public ISynset getSynset()
 	{
@@ -158,7 +158,7 @@ public class Word implements IWord
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IWord#getLexicalID()
+	 * @see edu.edu.mit.jwi.item.IWord#getLexicalID()
 	 */
 	public int getLexicalID()
 	{
@@ -168,7 +168,7 @@ public class Word implements IWord
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IWord#getAdjectiveMarker()
+	 * @see edu.edu.mit.jwi.item.IWord#getAdjectiveMarker()
 	 */
 	public AdjMarker getAdjectiveMarker()
 	{
@@ -178,7 +178,7 @@ public class Word implements IWord
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IWord#getSenseKey()
+	 * @see edu.edu.mit.jwi.item.IWord#getSenseKey()
 	 */
 	public ISenseKey getSenseKey()
 	{
@@ -188,7 +188,7 @@ public class Word implements IWord
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IWord#getRelatedMap()
+	 * @see edu.edu.mit.jwi.item.IWord#getRelatedMap()
 	 */
 	public Map<IPointer, List<IWordID>> getRelatedMap()
 	{
@@ -198,7 +198,7 @@ public class Word implements IWord
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IWord#getRelatedWords(edu.mit.jwi.item.IPointer)
+	 * @see edu.edu.mit.jwi.item.IWord#getRelatedWords(edu.edu.mit.jwi.item.IPointer)
 	 */
 	public List<IWordID> getRelatedWords(IPointer type)
 	{
@@ -209,7 +209,7 @@ public class Word implements IWord
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IWord#getRelatedWords()
+	 * @see edu.edu.mit.jwi.item.IWord#getRelatedWords()
 	 */
 	public List<IWordID> getRelatedWords()
 	{
@@ -219,7 +219,7 @@ public class Word implements IWord
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IWord#getVerbFrames()
+	 * @see edu.edu.mit.jwi.item.IWord#getVerbFrames()
 	 */
 	public List<IVerbFrame> getVerbFrames()
 	{

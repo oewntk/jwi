@@ -97,7 +97,7 @@ public class StemmingRule implements IStemmingRule
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.morph.IStemmingRule#getSuffix()
+	 * @see edu.edu.mit.jwi.morph.IStemmingRule#getSuffix()
 	 */
 	public String getSuffix()
 	{
@@ -107,7 +107,7 @@ public class StemmingRule implements IStemmingRule
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.morph.IStemmingRule#getEnding()
+	 * @see edu.edu.mit.jwi.morph.IStemmingRule#getEnding()
 	 */
 	public String getEnding()
 	{
@@ -117,7 +117,7 @@ public class StemmingRule implements IStemmingRule
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.morph.IStemmingRule#getSuffixIgnoreSet()
+	 * @see edu.edu.mit.jwi.morph.IStemmingRule#getSuffixIgnoreSet()
 	 */
 	public Set<String> getSuffixIgnoreSet()
 	{
@@ -127,7 +127,7 @@ public class StemmingRule implements IStemmingRule
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IHasPOS#getPOS()
+	 * @see edu.edu.mit.jwi.item.IHasPOS#getPOS()
 	 */
 	public POS getPOS()
 	{
@@ -137,7 +137,7 @@ public class StemmingRule implements IStemmingRule
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.morph.IStemmingRule#apply(java.lang.String)
+	 * @see edu.edu.mit.jwi.morph.IStemmingRule#apply(java.lang.String)
 	 */
 	public String apply(String word)
 	{
@@ -147,7 +147,7 @@ public class StemmingRule implements IStemmingRule
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.morph.IStemmingRule#apply(java.lang.String, java.lang.String)
+	 * @see edu.edu.mit.jwi.morph.IStemmingRule#apply(java.lang.String, java.lang.String)
 	 */
 	public String apply(String word, String suffix)
 	{

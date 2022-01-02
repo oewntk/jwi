@@ -141,7 +141,7 @@ public class SenseKey implements ISenseKey
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.ISenseKey#getLemma()
+	 * @see edu.edu.mit.jwi.item.ISenseKey#getLemma()
 	 */
 	public String getLemma()
 	{
@@ -151,7 +151,7 @@ public class SenseKey implements ISenseKey
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.ISenseKey#getLexicalID()
+	 * @see edu.edu.mit.jwi.item.ISenseKey#getLexicalID()
 	 */
 	public int getLexicalID()
 	{
@@ -161,7 +161,7 @@ public class SenseKey implements ISenseKey
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IHasPOS#getPOS()
+	 * @see edu.edu.mit.jwi.item.IHasPOS#getPOS()
 	 */
 	public POS getPOS()
 	{
@@ -171,7 +171,7 @@ public class SenseKey implements ISenseKey
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.ISenseKey#getSynsetType()
+	 * @see edu.edu.mit.jwi.item.ISenseKey#getSynsetType()
 	 */
 	public int getSynsetType()
 	{
@@ -181,7 +181,7 @@ public class SenseKey implements ISenseKey
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.ISenseKey#isAdjectiveSatellite()
+	 * @see edu.edu.mit.jwi.item.ISenseKey#isAdjectiveSatellite()
 	 */
 	public boolean isAdjectiveSatellite()
 	{
@@ -191,7 +191,7 @@ public class SenseKey implements ISenseKey
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.ISenseKey#getLexicalFile()
+	 * @see edu.edu.mit.jwi.item.ISenseKey#getLexicalFile()
 	 */
 	public ILexFile getLexicalFile()
 	{
@@ -201,7 +201,7 @@ public class SenseKey implements ISenseKey
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.ISenseKey#setHead(java.lang.String, int)
+	 * @see edu.edu.mit.jwi.item.ISenseKey#setHead(java.lang.String, int)
 	 */
 	public void setHead(String headLemma, int headLexID)
 	{
@@ -218,7 +218,7 @@ public class SenseKey implements ISenseKey
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.ISenseKey#getHeadWord()
+	 * @see edu.edu.mit.jwi.item.ISenseKey#getHeadWord()
 	 */
 	public String getHeadWord()
 	{
@@ -229,7 +229,7 @@ public class SenseKey implements ISenseKey
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.ISenseKey#getHeadID()
+	 * @see edu.edu.mit.jwi.item.ISenseKey#getHeadID()
 	 */
 	public int getHeadID()
 	{
@@ -240,7 +240,7 @@ public class SenseKey implements ISenseKey
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.ISenseKey#needsHeadSet()
+	 * @see edu.edu.mit.jwi.item.ISenseKey#needsHeadSet()
 	 */
 	public boolean needsHeadSet()
 	{

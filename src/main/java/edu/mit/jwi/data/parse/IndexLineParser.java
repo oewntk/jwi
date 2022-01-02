@@ -63,7 +63,7 @@ public class IndexLineParser implements ILineParser<IIndexWord>
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.data.parse.ILineParser#parseLine(java.lang.String)
+	 * @see edu.edu.mit.jwi.data.parse.ILineParser#parseLine(java.lang.String)
 	 */
 	public IIndexWord parseLine(String line)
 	{

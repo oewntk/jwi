@@ -92,7 +92,7 @@ public class DataType<T> implements IDataType<T>
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.data.IDataType#hasVersion()
+	 * @see edu.edu.mit.jwi.data.IDataType#hasVersion()
 	 */
 	public boolean hasVersion()
 	{
@@ -102,7 +102,7 @@ public class DataType<T> implements IDataType<T>
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.data.IDataType#getResourceNameHints()
+	 * @see edu.edu.mit.jwi.data.IDataType#getResourceNameHints()
 	 */
 	public Set<String> getResourceNameHints()
 	{
@@ -112,7 +112,7 @@ public class DataType<T> implements IDataType<T>
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.data.IDataType#getParser()
+	 * @see edu.edu.mit.jwi.data.IDataType#getParser()
 	 */
 	public ILineParser<T> getParser()
 	{

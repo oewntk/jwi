@@ -80,7 +80,7 @@ public class ExceptionEntryProxy implements IExceptionEntryProxy
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IExceptionEntryProxy#getSurfaceForm()
+	 * @see edu.edu.mit.jwi.item.IExceptionEntryProxy#getSurfaceForm()
 	 */
 	public String getSurfaceForm()
 	{
@@ -90,7 +90,7 @@ public class ExceptionEntryProxy implements IExceptionEntryProxy
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IExceptionEntryProxy#getRootForms()
+	 * @see edu.edu.mit.jwi.item.IExceptionEntryProxy#getRootForms()
 	 */
 	public List<String> getRootForms()
 	{

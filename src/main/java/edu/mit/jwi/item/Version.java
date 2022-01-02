@@ -15,6 +15,7 @@ import edu.mit.jwi.data.WordnetFile;
 import edu.mit.jwi.data.compare.ICommentDetector;
 
 import java.lang.reflect.Field;
+import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.util.*;
 import java.util.regex.Matcher;
@@ -123,7 +124,7 @@ public class Version implements IVersion
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IVersion#getMajorVersion()
+	 * @see edu.edu.mit.jwi.item.IVersion#getMajorVersion()
 	 */
 	public int getMajorVersion()
 	{
@@ -133,7 +134,7 @@ public class Version implements IVersion
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IVersion#getMinorVersion()
+	 * @see edu.edu.mit.jwi.item.IVersion#getMinorVersion()
 	 */
 	public int getMinorVersion()
 	{
@@ -143,7 +144,7 @@ public class Version implements IVersion
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IVersion#getBugfixVersion()
+	 * @see edu.edu.mit.jwi.item.IVersion#getBugfixVersion()
 	 */
 	public int getBugfixVersion()
 	{
@@ -153,7 +154,7 @@ public class Version implements IVersion
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IVersion#getQualifier()
+	 * @see edu.edu.mit.jwi.item.IVersion#getQualifier()
 	 */
 	public String getQualifier()
 	{
@@ -495,7 +496,7 @@ public class Version implements IVersion
 				break;
 			}
 		}
-		buffer.position(origPos);
+		((Buffer)buffer).position(origPos);
 		return parseVersionProtected(line);
 	}
 

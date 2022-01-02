@@ -147,7 +147,7 @@ public class IndexWord implements IIndexWord
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IIndexWord#getLemma()
+	 * @see edu.edu.mit.jwi.item.IIndexWord#getLemma()
 	 */
 	public String getLemma()
 	{
@@ -157,7 +157,7 @@ public class IndexWord implements IIndexWord
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IIndexWord#getPointers()
+	 * @see edu.edu.mit.jwi.item.IIndexWord#getPointers()
 	 */
 	public Set<IPointer> getPointers()
 	{
@@ -167,7 +167,7 @@ public class IndexWord implements IIndexWord
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IIndexWord#getWordIDs()
+	 * @see edu.edu.mit.jwi.item.IIndexWord#getWordIDs()
 	 */
 	public List<IWordID> getWordIDs()
 	{
@@ -177,7 +177,7 @@ public class IndexWord implements IIndexWord
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IIndexWord#getTagSenseCount()
+	 * @see edu.edu.mit.jwi.item.IIndexWord#getTagSenseCount()
 	 */
 	public int getTagSenseCount()
 	{
@@ -187,7 +187,7 @@ public class IndexWord implements IIndexWord
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IItem#getID()
+	 * @see edu.edu.mit.jwi.item.IItem#getID()
 	 */
 	public IIndexWordID getID()
 	{
@@ -197,7 +197,7 @@ public class IndexWord implements IIndexWord
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IHasPOS#getPOS()
+	 * @see edu.edu.mit.jwi.item.IHasPOS#getPOS()
 	 */
 	public POS getPOS()
 	{

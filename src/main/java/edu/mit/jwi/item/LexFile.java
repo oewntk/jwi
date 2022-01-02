@@ -116,7 +116,7 @@ public class LexFile implements ILexFile
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.ILexFile#getNumber()
+	 * @see edu.edu.mit.jwi.item.ILexFile#getNumber()
 	 */
 	public int getNumber()
 	{
@@ -126,7 +126,7 @@ public class LexFile implements ILexFile
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IHasPOS#getPOS()
+	 * @see edu.edu.mit.jwi.item.IHasPOS#getPOS()
 	 */
 	public POS getPOS()
 	{
@@ -136,7 +136,7 @@ public class LexFile implements ILexFile
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.ILexFile#getName()
+	 * @see edu.edu.mit.jwi.item.ILexFile#getName()
 	 */
 	public String getName()
 	{
@@ -146,7 +146,7 @@ public class LexFile implements ILexFile
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.ILexFile#getDescription()
+	 * @see edu.edu.mit.jwi.item.ILexFile#getDescription()
 	 */
 	public String getDescription()
 	{

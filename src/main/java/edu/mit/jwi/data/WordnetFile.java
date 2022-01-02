@@ -93,7 +93,7 @@ public abstract class WordnetFile<T> implements ILoadableDataSource<T>
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.data.IDataSource#getName()
+	 * @see edu.edu.mit.jwi.data.IDataSource#getName()
 	 */
 	public String getName()
 	{
@@ -129,7 +129,7 @@ public abstract class WordnetFile<T> implements ILoadableDataSource<T>
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.data.IDataSource#getContentType()
+	 * @see edu.edu.mit.jwi.data.IDataSource#getContentType()
 	 */
 	public IContentType<T> getContentType()
 	{
@@ -139,7 +139,7 @@ public abstract class WordnetFile<T> implements ILoadableDataSource<T>
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.data.IHasLifecycle#open()
+	 * @see edu.edu.mit.jwi.data.IHasLifecycle#open()
 	 */
 	public boolean open() throws IOException
 	{
@@ -162,7 +162,7 @@ public abstract class WordnetFile<T> implements ILoadableDataSource<T>
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.data.IHasLifecycle#isOpen()
+	 * @see edu.edu.mit.jwi.data.IHasLifecycle#isOpen()
 	 */
 	public boolean isOpen()
 	{
@@ -180,7 +180,7 @@ public abstract class WordnetFile<T> implements ILoadableDataSource<T>
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.data.IClosable#close()
+	 * @see edu.edu.mit.jwi.data.IClosable#close()
 	 */
 	public void close()
 	{
@@ -212,7 +212,7 @@ public abstract class WordnetFile<T> implements ILoadableDataSource<T>
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.data.ILoadable#isLoaded()
+	 * @see edu.edu.mit.jwi.data.ILoadable#isLoaded()
 	 */
 	public boolean isLoaded()
 	{
@@ -222,7 +222,7 @@ public abstract class WordnetFile<T> implements ILoadableDataSource<T>
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.data.ILoadable#load()
+	 * @see edu.edu.mit.jwi.data.ILoadable#load()
 	 */
 	public void load()
 	{
@@ -232,7 +232,7 @@ public abstract class WordnetFile<T> implements ILoadableDataSource<T>
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.data.ILoadable#load(boolean)
+	 * @see edu.edu.mit.jwi.data.ILoadable#load(boolean)
 	 */
 	public void load(boolean block)
 	{
@@ -314,7 +314,7 @@ public abstract class WordnetFile<T> implements ILoadableDataSource<T>
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.data.IDataSource#iterator(java.lang.String)
+	 * @see edu.edu.mit.jwi.data.IDataSource#iterator(java.lang.String)
 	 */
 	public LineIterator iterator(String key)
 	{
@@ -408,7 +408,7 @@ public abstract class WordnetFile<T> implements ILoadableDataSource<T>
 					int cur = buf.position();
 					c = (char) buf.get();
 					if (c != '\n')
-						buf.position(cur);
+						((Buffer)buf).position(cur);
 					break;
 				default:
 					input.append(c);
@@ -465,7 +465,7 @@ public abstract class WordnetFile<T> implements ILoadableDataSource<T>
 					int cur = buf.position();
 					b = buf.get();
 					if (b != 0x0A) // check for following newline
-						buf.position(cur);
+						((Buffer)buf).position(cur);
 					break;
 				default:
 					end++;
@@ -518,7 +518,7 @@ public abstract class WordnetFile<T> implements ILoadableDataSource<T>
 		}
 
 		// set the buffer to the beginning of the line
-		buf.position(i);
+		((Buffer)buf).position(i);
 	}
 
 	/**
@@ -613,7 +613,7 @@ public abstract class WordnetFile<T> implements ILoadableDataSource<T>
 				int pos = itrBuffer.position();
 				ByteBuffer newBuf = buffer.asReadOnlyBuffer();
 				((Buffer) newBuf).clear();
-				newBuf.position(pos);
+				((Buffer)newBuf).position(pos);
 				itrBuffer = newBuf;
 			}
 

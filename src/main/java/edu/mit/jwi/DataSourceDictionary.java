@@ -62,7 +62,7 @@ public class DataSourceDictionary implements IDataSourceDictionary
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.item.IHasVersion#getVersion()
+	 * @see edu.edu.mit.jwi.item.IHasVersion#getVersion()
 	 */
 	public IVersion getVersion()
 	{
@@ -116,7 +116,7 @@ public class DataSourceDictionary implements IDataSourceDictionary
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.data.IHasCharset#getCharset()
+	 * @see edu.edu.mit.jwi.data.IHasCharset#getCharset()
 	 */
 	public Charset getCharset()
 	{
@@ -137,7 +137,7 @@ public class DataSourceDictionary implements IDataSourceDictionary
 	 * (non-Javadoc)
 	 *
 	 * @see edu.mit.jwi.IDictionary#getIndexWord(java.lang.String,
-	 *      edu.mit.jwi.item.POS)
+	 *      edu.edu.mit.jwi.item.POS)
 	 */
 	public IIndexWord getIndexWord(String lemma, POS pos)
 	{
@@ -148,7 +148,7 @@ public class DataSourceDictionary implements IDataSourceDictionary
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.IDictionary#getIndexWord(edu.mit.jwi.item.IIndexWordID)
+	 * @see edu.mit.jwi.IDictionary#getIndexWord(edu.edu.mit.jwi.item.IIndexWordID)
 	 */
 	public IIndexWord getIndexWord(IIndexWordID id)
 	{
@@ -164,7 +164,7 @@ public class DataSourceDictionary implements IDataSourceDictionary
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.IDictionary#getWord(edu.mit.jwi.item.IWordID)
+	 * @see edu.mit.jwi.IDictionary#getWord(edu.edu.mit.jwi.item.IWordID)
 	 */
 	public IWord getWord(IWordID id)
 	{
@@ -199,7 +199,7 @@ public class DataSourceDictionary implements IDataSourceDictionary
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.IDictionary#getWord(edu.mit.jwi.item.ISenseKey)
+	 * @see edu.mit.jwi.IDictionary#getWord(edu.edu.mit.jwi.item.ISenseKey)
 	 */
 	public IWord getWord(ISenseKey key)
 	{
@@ -250,7 +250,7 @@ public class DataSourceDictionary implements IDataSourceDictionary
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.IDictionary#getSenseEntry(edu.mit.jwi.item.ISenseKey)
+	 * @see edu.mit.jwi.IDictionary#getSenseEntry(edu.edu.mit.jwi.item.ISenseKey)
 	 */
 	public ISenseEntry getSenseEntry(ISenseKey key)
 	{
@@ -335,7 +335,7 @@ public class DataSourceDictionary implements IDataSourceDictionary
 	 * (non-Javadoc)
 	 *
 	 * @see edu.mit.jwi.IDictionary#getExceptionEntry(java.lang.String,
-	 *      edu.mit.jwi.item.POS)
+	 *      edu.edu.mit.jwi.item.POS)
 	 */
 	public IExceptionEntry getExceptionEntry(String surfaceForm, POS pos)
 	{
@@ -345,7 +345,7 @@ public class DataSourceDictionary implements IDataSourceDictionary
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.IDictionary#getExceptionEntry(edu.mit.jwi.item.IExceptionEntryID)
+	 * @see edu.mit.jwi.IDictionary#getExceptionEntry(edu.edu.mit.jwi.item.IExceptionEntryID)
 	 */
 	public IExceptionEntry getExceptionEntry(IExceptionEntryID id)
 	{
@@ -367,7 +367,7 @@ public class DataSourceDictionary implements IDataSourceDictionary
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.IDictionary#getIndexWordIterator(edu.mit.jwi.item.POS)
+	 * @see edu.mit.jwi.IDictionary#getIndexWordIterator(edu.edu.mit.jwi.item.POS)
 	 */
 	public Iterator<IIndexWord> getIndexWordIterator(POS pos)
 	{
@@ -378,7 +378,7 @@ public class DataSourceDictionary implements IDataSourceDictionary
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.IDictionary#getSynsetIterator(edu.mit.jwi.item.POS)
+	 * @see edu.mit.jwi.IDictionary#getSynsetIterator(edu.edu.mit.jwi.item.POS)
 	 */
 	public Iterator<ISynset> getSynsetIterator(POS pos)
 	{
@@ -389,7 +389,7 @@ public class DataSourceDictionary implements IDataSourceDictionary
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.IDictionary#getExceptionEntryIterator(edu.mit.jwi.item.POS)
+	 * @see edu.mit.jwi.IDictionary#getExceptionEntryIterator(edu.edu.mit.jwi.item.POS)
 	 */
 	public Iterator<IExceptionEntry> getExceptionEntryIterator(POS pos)
 	{
