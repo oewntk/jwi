@@ -98,11 +98,11 @@ public class ContentType<T> implements IContentType<T>
 
 		if (pos != null)
 		{
-			fString = "[ContentType: " + fType.toString() + "/" + fPOS.toString() + "]";
+			fString = "[ContentType: " + fType + "/" + fPOS + "]";
 		}
 		else
 		{
-			fString = "[ContentType: " + fType.toString() + "]";
+			fString = "[ContentType: " + fType + "]";
 		}
 	}
 

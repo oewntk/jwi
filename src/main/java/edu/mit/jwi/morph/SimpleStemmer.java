@@ -293,8 +293,8 @@ public class SimpleStemmer implements IStemmer
 		}
 		else
 		{
-			for (Object root : rootSet)
-				poss.add(new StringBuffer((String) root));
+			for (String root : rootSet)
+				poss.add(new StringBuffer(root));
 		}
 
 		// make all combinations
@@ -402,7 +402,7 @@ public class SimpleStemmer implements IStemmer
 		{
 			if (rootSets.get(i) == null)
 				continue;
-			for (Object partRoot : rootSets.get(i))
+			for (String partRoot : rootSets.get(i))
 			{
 				rootBuffer.replace(0, rootBuffer.length(), "");
 
@@ -410,7 +410,7 @@ public class SimpleStemmer implements IStemmer
 				{
 					if (j == i)
 					{
-						rootBuffer.append((String) partRoot);
+						rootBuffer.append(partRoot);
 					}
 					else
 					{

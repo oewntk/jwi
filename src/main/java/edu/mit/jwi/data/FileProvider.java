@@ -370,7 +370,7 @@ public class FileProvider implements IDataProvider, ILoadable, ILoadPolicy
 				return false;
 
 			// determine if it's already unmodifiable, wrap if not
-			Map<?, ?> map = Collections.unmodifiableMap(Collections.emptyMap());
+			Map<?, ?> map = Collections.emptyMap();
 			if (hiddenMap.getClass() != map.getClass())
 				hiddenMap = Collections.unmodifiableMap(hiddenMap);
 			this.fileMap = hiddenMap;

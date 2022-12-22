@@ -1,8 +1,8 @@
 <p align="center">
-<img width="256" height="256" src="images/oewntk.png">
+<img alt="oewntk" width="256" height="256" src="images/oewntk.png">
 </p>
 <p align="center">
-<img width="150" src="images/mavencentral.png">
+<img alt="mavencentral" alt="mavencentral" width="150" src="images/mavencentral.png">
 </p>
 
 # JWI - Java WordNet Interface
@@ -20,4 +20,4 @@ GroupID and ArtifactID on Maven Central:
 	<groupId>io.github.oewntk</groupId>
 	<artifactId>jwi</artifactId>
 	<packaging>jar</packaging>
-	<version>240.1.0</version>
+	<version>2.4.0.3</version>

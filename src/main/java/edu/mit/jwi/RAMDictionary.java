@@ -1355,7 +1355,7 @@ public class RAMDictionary implements IRAMDictionary
 		 * @throws NullPointerException if any argument is <code>null</code>
 		 * @since JWI 2.2.0
 		 */
-		protected IWord makeWord(ISynset newSynset, ISynset oldSynset, IWord old)
+		protected IWord makeWord(ISynset newSynset, @SuppressWarnings("unused") ISynset oldSynset, IWord old)
 		{
 			Map<IPointer, List<IWordID>> oldPtrs = old.getRelatedMap();
 			Map<IPointer, List<IWordID>> newPtrs = new HashMap<>(oldPtrs.size());

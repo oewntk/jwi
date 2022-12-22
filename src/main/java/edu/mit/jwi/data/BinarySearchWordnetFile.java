@@ -11,7 +11,6 @@
 package edu.mit.jwi.data;
 
 import java.io.File;
-import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.util.Comparator;
 
@@ -71,7 +70,7 @@ public class BinarySearchWordnetFile<T> extends WordnetFile<T>
 			{
 				// find the middle of the buffer
 				midpoint = (start + stop) / 2;
-				((Buffer)buffer).position(midpoint);
+				buffer.position(midpoint);
 
 				// back up to the beginning of the line
 				rewindToLineStart(buffer);
@@ -155,7 +154,7 @@ public class BinarySearchWordnetFile<T> extends WordnetFile<T>
 				while (start + 1 < stop)
 				{
 					midpoint = (start + stop) / 2;
-					((Buffer)itrBuffer).position(midpoint);
+					itrBuffer.position(midpoint);
 					getLine(itrBuffer, getContentType().getCharset());
 					offset = itrBuffer.position();
 					line = getLine(itrBuffer, getContentType().getCharset());
@@ -164,7 +163,7 @@ public class BinarySearchWordnetFile<T> extends WordnetFile<T>
 					// the end of the file, so just advance to the first line
 					if (line == null)
 					{
-						((Buffer)itrBuffer).position(itrBuffer.limit());
+						itrBuffer.position(itrBuffer.limit());
 						return;
 					}
 
@@ -195,14 +194,14 @@ public class BinarySearchWordnetFile<T> extends WordnetFile<T>
 				// with the pattern
 				if (lastOffset > -1)
 				{
-					((Buffer)itrBuffer).position(lastOffset);
+					itrBuffer.position(lastOffset);
 					next = getLine(itrBuffer, getContentType().getCharset());
 					return;
 				}
 
 				// If we didn't have any lines that matched the pattern
 				// then just advance to the first non-comment
-				((Buffer)itrBuffer).position(itrBuffer.limit());
+				itrBuffer.position(itrBuffer.limit());
 			}
 		}
 	}

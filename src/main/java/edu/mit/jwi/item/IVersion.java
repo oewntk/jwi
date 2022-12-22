@@ -119,7 +119,7 @@ public interface IVersion extends Serializable
 		 * @return the singleton dummy version object.
 		 * @since JWI 2.4.0
 		 */
-		@SuppressWarnings("SameReturnValue") protected Object readResolve()
+		@SuppressWarnings("SameReturnValue") Object readResolve()
 		{
 			return IVersion.NO_VERSION;
 		}
