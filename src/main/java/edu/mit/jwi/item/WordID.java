@@ -198,7 +198,7 @@ public class WordID implements IWordID
     public int hashCode()
     {
         return 31 * id.hashCode();
-  }
+    }
 
     /*
      * (non-Javadoc)
