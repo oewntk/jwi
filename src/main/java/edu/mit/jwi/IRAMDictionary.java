@@ -100,6 +100,7 @@ public interface IRAMDictionary extends IDictionary, ILoadPolicy, ILoadable
          */
         public InputStream makeInputStream() throws IOException
         {
+            //noinspection IOStreamConstructor
             return new FileInputStream(file);
         }
     }
