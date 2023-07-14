@@ -198,14 +198,7 @@ public class WordID implements IWordID
     public int hashCode()
     {
         return 31 * id.hashCode();
-        //        final int PRIME = 31;
-        //        int result = 1;
-        //        result = PRIME * result + ((id == null) ? 0 : id.hashCode());
-        //        result = PRIME * result + num;
-        //        if (lemma != null)
-        //        	result = PRIME * result + lemma.hashCode();
-        //        return result;
-    }
+  }
 
     /*
      * (non-Javadoc)
