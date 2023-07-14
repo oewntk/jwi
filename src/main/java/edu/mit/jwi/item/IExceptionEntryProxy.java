@@ -26,23 +26,23 @@ import java.util.List;
 public interface IExceptionEntryProxy extends Serializable
 {
 
-	/**
-	 * Returns the surface form (i.e., not the root form) of the word for this
-	 * exception entry. Because all surface forms in the exception files are
-	 * lower case, the string returned by this call is also lower case.
-	 *
-	 * @return the lowercase surface form of the exception entry
-	 * @since JWI 1.0
-	 */
-	String getSurfaceForm();
+    /**
+     * Returns the surface form (i.e., not the root form) of the word for this
+     * exception entry. Because all surface forms in the exception files are
+     * lower case, the string returned by this call is also lower case.
+     *
+     * @return the lowercase surface form of the exception entry
+     * @since JWI 1.0
+     */
+    String getSurfaceForm();
 
-	/**
-	 * Returns an unmodifiable list of acceptable root forms for the surface
-	 * form.
-	 *
-	 * @return A non-null, non-empty, unmodifiable list of root forms
-	 * @since JWI 2.0.0
-	 */
-	List<String> getRootForms();
+    /**
+     * Returns an unmodifiable list of acceptable root forms for the surface
+     * form.
+     *
+     * @return A non-null, non-empty, unmodifiable list of root forms
+     * @since JWI 2.0.0
+     */
+    List<String> getRootForms();
 
 }

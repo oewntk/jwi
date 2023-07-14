@@ -20,13 +20,13 @@ package edu.mit.jwi.item;
 public interface IHasPOS
 {
 
-	/**
-	 * Returns the associated part of speech for this object. If this object is
-	 * not associated with any particular part of speech, this method may return
-	 * <code>null</code>.
-	 *
-	 * @return The associated part of speech, or <code>null</code> if none.
-	 * @since JWI 2.0.0
-	 */
-	POS getPOS();
+    /**
+     * Returns the associated part of speech for this object. If this object is
+     * not associated with any particular part of speech, this method may return
+     * <code>null</code>.
+     *
+     * @return The associated part of speech, or <code>null</code> if none.
+     * @since JWI 2.0.0
+     */
+    POS getPOS();
 }

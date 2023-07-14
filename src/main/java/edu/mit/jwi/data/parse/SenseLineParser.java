@@ -29,92 +29,92 @@ import edu.mit.jwi.item.SenseEntry;
 public class SenseLineParser implements ILineParser<ISenseEntry>
 {
 
-	// singleton instance
-	private static SenseLineParser instance;
+    // singleton instance
+    private static SenseLineParser instance;
 
-	/**
-	 * Returns the singleton instance of this class, instantiating it if
-	 * necessary. The singleton instance will not be <code>null</code>.
-	 *
-	 * @return the non-<code>null</code> singleton instance of this class,
-	 * instantiating it if necessary.
-	 * @since JWI 2.1.0
-	 */
-	public static SenseLineParser getInstance()
-	{
-		if (instance == null)
-			instance = new SenseLineParser();
-		return instance;
-	}
+    /**
+     * Returns the singleton instance of this class, instantiating it if
+     * necessary. The singleton instance will not be <code>null</code>.
+     *
+     * @return the non-<code>null</code> singleton instance of this class,
+     * instantiating it if necessary.
+     * @since JWI 2.1.0
+     */
+    public static SenseLineParser getInstance()
+    {
+        if (instance == null)
+            instance = new SenseLineParser();
+        return instance;
+    }
 
-	// instance fields
-	protected final ILineParser<ISenseKey> keyParser;
+    // instance fields
+    protected final ILineParser<ISenseKey> keyParser;
 
-	/**
-	 * This constructor is marked protected so that the class may be
-	 * sub-classed, but not directly instantiated. Obtain instances of this
-	 * class via the static {@link #getInstance()} method.
-	 *
-	 * @since JWI 2.1.0
-	 */
-	protected SenseLineParser()
-	{
-		this(SenseKeyParser.getInstance());
-	}
+    /**
+     * This constructor is marked protected so that the class may be
+     * sub-classed, but not directly instantiated. Obtain instances of this
+     * class via the static {@link #getInstance()} method.
+     *
+     * @since JWI 2.1.0
+     */
+    protected SenseLineParser()
+    {
+        this(SenseKeyParser.getInstance());
+    }
 
-	/**
-	 * This constructor is marked protected so that the class may be
-	 * sub-classed, but not directly instantiated. Obtain instances of this
-	 * class via the static {@link #getInstance()} method.
-	 *
-	 * @param keyParser the sense key parser this sense line parser should use
-	 * @throws NullPointerException if the specified key parser is <code>null</code>
-	 * @since JWI 2.2.0
-	 */
-	protected SenseLineParser(ILineParser<ISenseKey> keyParser)
-	{
-		if (keyParser == null)
-			throw new NullPointerException();
-		this.keyParser = keyParser;
-	}
+    /**
+     * This constructor is marked protected so that the class may be
+     * sub-classed, but not directly instantiated. Obtain instances of this
+     * class via the static {@link #getInstance()} method.
+     *
+     * @param keyParser the sense key parser this sense line parser should use
+     * @throws NullPointerException if the specified key parser is <code>null</code>
+     * @since JWI 2.2.0
+     */
+    protected SenseLineParser(ILineParser<ISenseKey> keyParser)
+    {
+        if (keyParser == null)
+            throw new NullPointerException();
+        this.keyParser = keyParser;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.edu.mit.jwi.data.parse.ILineParser#parseLine(java.lang.String)
-	 */
-	public ISenseEntry parseLine(String line)
-	{
-		if (line == null)
-			throw new NullPointerException();
+    /*
+     * (non-Javadoc)
+     *
+     * @see edu.edu.mit.jwi.data.parse.ILineParser#parseLine(java.lang.String)
+     */
+    public ISenseEntry parseLine(String line)
+    {
+        if (line == null)
+            throw new NullPointerException();
 
-		try
-		{
-			int begin = 0, end;
+        try
+        {
+            int begin = 0, end;
 
-			// get sense key
-			end = line.indexOf(' ', begin);
-			String keyStr = line.substring(begin, end);
-			ISenseKey sense_key = keyParser.parseLine(keyStr);
+            // get sense key
+            end = line.indexOf(' ', begin);
+            String keyStr = line.substring(begin, end);
+            ISenseKey sense_key = keyParser.parseLine(keyStr);
 
-			// get offset
-			begin = end + 1;
-			end = line.indexOf(' ', begin);
-			int synset_offset = Integer.parseInt(line.substring(begin, end));
+            // get offset
+            begin = end + 1;
+            end = line.indexOf(' ', begin);
+            int synset_offset = Integer.parseInt(line.substring(begin, end));
 
-			// get sense number
-			begin = end + 1;
-			end = line.indexOf(' ', begin);
-			int sense_number = Integer.parseInt(line.substring(begin, end));
+            // get sense number
+            begin = end + 1;
+            end = line.indexOf(' ', begin);
+            int sense_number = Integer.parseInt(line.substring(begin, end));
 
-			// get tag cnt
-			begin = end + 1;
-			int tag_cnt = Integer.parseInt(line.substring(begin));
-			return new SenseEntry(sense_key, synset_offset, sense_number, tag_cnt);
-		}
-		catch (Exception e)
-		{
-			throw new MisformattedLineException(line, e);
-		}
-	}
+            // get tag cnt
+            begin = end + 1;
+            int tag_cnt = Integer.parseInt(line.substring(begin));
+            return new SenseEntry(sense_key, synset_offset, sense_number, tag_cnt);
+        }
+        catch (Exception e)
+        {
+            throw new MisformattedLineException(line, e);
+        }
+    }
 }

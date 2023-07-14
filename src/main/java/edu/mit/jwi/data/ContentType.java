@@ -31,261 +31,261 @@ import java.util.*;
 public class ContentType<T> implements IContentType<T>
 {
 
-	public static final ContentType<IIndexWord> INDEX_NOUN = new ContentType<>(DataType.INDEX, POS.NOUN, IndexLineComparator.getInstance());
-	public static final ContentType<IIndexWord> INDEX_VERB = new ContentType<>(DataType.INDEX, POS.VERB, IndexLineComparator.getInstance());
-	public static final ContentType<IIndexWord> INDEX_ADVERB = new ContentType<>(DataType.INDEX, POS.ADVERB, IndexLineComparator.getInstance());
-	public static final ContentType<IIndexWord> INDEX_ADJECTIVE = new ContentType<>(DataType.INDEX, POS.ADJECTIVE, IndexLineComparator.getInstance());
-	public static final ContentType<ISynset> DATA_NOUN = new ContentType<>(DataType.DATA, POS.NOUN, DataLineComparator.getInstance());
-	public static final ContentType<ISynset> DATA_VERB = new ContentType<>(DataType.DATA, POS.VERB, DataLineComparator.getInstance());
-	public static final ContentType<ISynset> DATA_ADVERB = new ContentType<>(DataType.DATA, POS.ADVERB, DataLineComparator.getInstance());
-	public static final ContentType<ISynset> DATA_ADJECTIVE = new ContentType<>(DataType.DATA, POS.ADJECTIVE, DataLineComparator.getInstance());
-	public static final ContentType<IExceptionEntryProxy> EXCEPTION_NOUN = new ContentType<>(DataType.EXCEPTION, POS.NOUN,
-			ExceptionLineComparator.getInstance());
-	public static final ContentType<IExceptionEntryProxy> EXCEPTION_VERB = new ContentType<>(DataType.EXCEPTION, POS.VERB,
-			ExceptionLineComparator.getInstance());
-	public static final ContentType<IExceptionEntryProxy> EXCEPTION_ADVERB = new ContentType<>(DataType.EXCEPTION, POS.ADVERB,
-			ExceptionLineComparator.getInstance());
-	public static final ContentType<IExceptionEntryProxy> EXCEPTION_ADJECTIVE = new ContentType<>(DataType.EXCEPTION, POS.ADJECTIVE,
-			ExceptionLineComparator.getInstance());
-	public static final ContentType<ISenseEntry> SENSE = new ContentType<>(DataType.SENSE, null, SenseKeyLineComparator.getInstance());
+    public static final ContentType<IIndexWord> INDEX_NOUN = new ContentType<>(DataType.INDEX, POS.NOUN, IndexLineComparator.getInstance());
+    public static final ContentType<IIndexWord> INDEX_VERB = new ContentType<>(DataType.INDEX, POS.VERB, IndexLineComparator.getInstance());
+    public static final ContentType<IIndexWord> INDEX_ADVERB = new ContentType<>(DataType.INDEX, POS.ADVERB, IndexLineComparator.getInstance());
+    public static final ContentType<IIndexWord> INDEX_ADJECTIVE = new ContentType<>(DataType.INDEX, POS.ADJECTIVE, IndexLineComparator.getInstance());
+    public static final ContentType<ISynset> DATA_NOUN = new ContentType<>(DataType.DATA, POS.NOUN, DataLineComparator.getInstance());
+    public static final ContentType<ISynset> DATA_VERB = new ContentType<>(DataType.DATA, POS.VERB, DataLineComparator.getInstance());
+    public static final ContentType<ISynset> DATA_ADVERB = new ContentType<>(DataType.DATA, POS.ADVERB, DataLineComparator.getInstance());
+    public static final ContentType<ISynset> DATA_ADJECTIVE = new ContentType<>(DataType.DATA, POS.ADJECTIVE, DataLineComparator.getInstance());
+    public static final ContentType<IExceptionEntryProxy> EXCEPTION_NOUN = new ContentType<>(DataType.EXCEPTION, POS.NOUN,
+            ExceptionLineComparator.getInstance());
+    public static final ContentType<IExceptionEntryProxy> EXCEPTION_VERB = new ContentType<>(DataType.EXCEPTION, POS.VERB,
+            ExceptionLineComparator.getInstance());
+    public static final ContentType<IExceptionEntryProxy> EXCEPTION_ADVERB = new ContentType<>(DataType.EXCEPTION, POS.ADVERB,
+            ExceptionLineComparator.getInstance());
+    public static final ContentType<IExceptionEntryProxy> EXCEPTION_ADJECTIVE = new ContentType<>(DataType.EXCEPTION, POS.ADJECTIVE,
+            ExceptionLineComparator.getInstance());
+    public static final ContentType<ISenseEntry> SENSE = new ContentType<>(DataType.SENSE, null, SenseKeyLineComparator.getInstance());
 
-	// fields set on construction
-	private final IDataType<T> fType;
-	private final POS fPOS;
-	private final ILineComparator fComparator;
-	private final String fString;
-	private final Charset fCharset;
+    // fields set on construction
+    private final IDataType<T> fType;
+    private final POS fPOS;
+    private final ILineComparator fComparator;
+    private final String fString;
+    private final Charset fCharset;
 
-	/**
-	 * Constructs a new ContentType
-	 *
-	 * @param type       the data type for this content type, may not be
-	 *                   <code>null</code>
-	 * @param pos        the part of speech for this content type; may be null if the
-	 *                   content type has no natural part of speech
-	 * @param comparator the line comparator for this content type; may be
-	 *                   <code>null</code> if the lines are not ordered
-	 * @since JWI 2.0.0
-	 */
-	public ContentType(IDataType<T> type, POS pos, ILineComparator comparator)
-	{
-		// for 2.4.0 we introduce a redirect for end-users of the original constructor
-		this(type, pos, comparator, null);
-	}
+    /**
+     * Constructs a new ContentType
+     *
+     * @param type       the data type for this content type, may not be
+     *                   <code>null</code>
+     * @param pos        the part of speech for this content type; may be null if the
+     *                   content type has no natural part of speech
+     * @param comparator the line comparator for this content type; may be
+     *                   <code>null</code> if the lines are not ordered
+     * @since JWI 2.0.0
+     */
+    public ContentType(IDataType<T> type, POS pos, ILineComparator comparator)
+    {
+        // for 2.4.0 we introduce a redirect for end-users of the original constructor
+        this(type, pos, comparator, null);
+    }
 
-	/**
-	 * Constructs a new ContentType
-	 *
-	 * @param type       the data type for this content type, may not be
-	 *                   <code>null</code>
-	 * @param pos        the part of speech for this content type; may be null if the
-	 *                   content type has no natural part of speech
-	 * @param comparator the line comparator for this content type; may be
-	 *                   <code>null</code> if the lines are not ordered
-	 * @param charset    the character set for this content type, may be
-	 *                   <code>null</code>
-	 * @since JWI 2.3.4
-	 */
-	public ContentType(IDataType<T> type, POS pos, ILineComparator comparator, Charset charset)
-	{
-		if (type == null)
-			throw new NullPointerException();
+    /**
+     * Constructs a new ContentType
+     *
+     * @param type       the data type for this content type, may not be
+     *                   <code>null</code>
+     * @param pos        the part of speech for this content type; may be null if the
+     *                   content type has no natural part of speech
+     * @param comparator the line comparator for this content type; may be
+     *                   <code>null</code> if the lines are not ordered
+     * @param charset    the character set for this content type, may be
+     *                   <code>null</code>
+     * @since JWI 2.3.4
+     */
+    public ContentType(IDataType<T> type, POS pos, ILineComparator comparator, Charset charset)
+    {
+        if (type == null)
+            throw new NullPointerException();
 
-		fType = type;
-		fPOS = pos;
-		fComparator = comparator;
-		fCharset = charset;
+        fType = type;
+        fPOS = pos;
+        fComparator = comparator;
+        fCharset = charset;
 
-		if (pos != null)
-		{
-			fString = "[ContentType: " + fType + "/" + fPOS + "]";
-		}
-		else
-		{
-			fString = "[ContentType: " + fType + "]";
-		}
-	}
+        if (pos != null)
+        {
+            fString = "[ContentType: " + fType + "/" + fPOS + "]";
+        }
+        else
+        {
+            fString = "[ContentType: " + fType + "]";
+        }
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.edu.mit.jwi.data.IContentType#getDataType()
-	 */
-	public IDataType<T> getDataType()
-	{
-		return fType;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see edu.edu.mit.jwi.data.IContentType#getDataType()
+     */
+    public IDataType<T> getDataType()
+    {
+        return fType;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.edu.mit.jwi.item.IHasPOS#getPOS()
-	 */
-	public POS getPOS()
-	{
-		return fPOS;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see edu.edu.mit.jwi.item.IHasPOS#getPOS()
+     */
+    public POS getPOS()
+    {
+        return fPOS;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.edu.mit.jwi.data.IContentType#getLineComparator()
-	 */
-	public ILineComparator getLineComparator()
-	{
-		return fComparator;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see edu.edu.mit.jwi.data.IContentType#getLineComparator()
+     */
+    public ILineComparator getLineComparator()
+    {
+        return fComparator;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.edu.mit.jwi.data.IHasCharset#getCharset()
-	 */
-	public Charset getCharset()
-	{
-		return fCharset;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see edu.edu.mit.jwi.data.IHasCharset#getCharset()
+     */
+    public Charset getCharset()
+    {
+        return fCharset;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see java.lang.Object#toString()
-	 */
-	public String toString()
-	{
-		return fString;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
+    public String toString()
+    {
+        return fString;
+    }
 
-	// set of all content types implemented in this class
-	private static final Set<ContentType<?>> contentTypes;
+    // set of all content types implemented in this class
+    private static final Set<ContentType<?>> contentTypes;
 
-	// initialization for static content type set
-	static
-	{
-		// get all the fields containing ContentType
-		Field[] fields = ContentType.class.getFields();
-		List<Field> instanceFields = new ArrayList<>();
-		for (Field field : fields)
-			if (field.getType() == ContentType.class)
-				instanceFields.add(field);
+    // initialization for static content type set
+    static
+    {
+        // get all the fields containing ContentType
+        Field[] fields = ContentType.class.getFields();
+        List<Field> instanceFields = new ArrayList<>();
+        for (Field field : fields)
+            if (field.getType() == ContentType.class)
+                instanceFields.add(field);
 
-		// this is the backing set
-		Set<ContentType<?>> hidden = new LinkedHashSet<>(instanceFields.size());
+        // this is the backing set
+        Set<ContentType<?>> hidden = new LinkedHashSet<>(instanceFields.size());
 
-		// fill in the backing set
-		ContentType<?> contentType;
-		for (Field field : instanceFields)
-		{
-			try
-			{
-				contentType = (ContentType<?>) field.get(null);
-				if (contentType == null)
-					continue;
-				hidden.add(contentType);
-			}
-			catch (IllegalAccessException e)
-			{
-				// Ignore
-			}
-		}
+        // fill in the backing set
+        ContentType<?> contentType;
+        for (Field field : instanceFields)
+        {
+            try
+            {
+                contentType = (ContentType<?>) field.get(null);
+                if (contentType == null)
+                    continue;
+                hidden.add(contentType);
+            }
+            catch (IllegalAccessException e)
+            {
+                // Ignore
+            }
+        }
 
-		// make the value set unmodifiable
-		contentTypes = Collections.unmodifiableSet(hidden);
-	}
+        // make the value set unmodifiable
+        contentTypes = Collections.unmodifiableSet(hidden);
+    }
 
-	/**
-	 * Emulates the Enum.values() function.
-	 *
-	 * @return all the static ContentType instances listed in the class, in the
-	 * order they are declared.
-	 * @since JWI 2.0.0
-	 */
-	public static Collection<ContentType<?>> values()
-	{
-		return contentTypes;
-	}
+    /**
+     * Emulates the Enum.values() function.
+     *
+     * @return all the static ContentType instances listed in the class, in the
+     * order they are declared.
+     * @since JWI 2.0.0
+     */
+    public static Collection<ContentType<?>> values()
+    {
+        return contentTypes;
+    }
 
-	/**
-	 * Use this convenience method to retrieve the appropriate
-	 * {@code IIndexWord} content type for the specified POS.
-	 *
-	 * @param pos the part of speech for the content type, may not be
-	 *            <code>null</code>
-	 * @return the index content type for the specified part of speech
-	 * @throws NullPointerException if the specified part of speech is <code>null</code>
-	 * @since JWI 2.0.0
-	 */
-	public static IContentType<IIndexWord> getIndexContentType(POS pos)
-	{
-		if (pos == null)
-			throw new NullPointerException();
-		switch (pos)
-		{
-			case NOUN:
-				return INDEX_NOUN;
-			case VERB:
-				return INDEX_VERB;
-			case ADVERB:
-				return INDEX_ADVERB;
-			case ADJECTIVE:
-				return INDEX_ADJECTIVE;
-		}
-		throw new IllegalStateException("This should not happen.");
-	}
+    /**
+     * Use this convenience method to retrieve the appropriate
+     * {@code IIndexWord} content type for the specified POS.
+     *
+     * @param pos the part of speech for the content type, may not be
+     *            <code>null</code>
+     * @return the index content type for the specified part of speech
+     * @throws NullPointerException if the specified part of speech is <code>null</code>
+     * @since JWI 2.0.0
+     */
+    public static IContentType<IIndexWord> getIndexContentType(POS pos)
+    {
+        if (pos == null)
+            throw new NullPointerException();
+        switch (pos)
+        {
+            case NOUN:
+                return INDEX_NOUN;
+            case VERB:
+                return INDEX_VERB;
+            case ADVERB:
+                return INDEX_ADVERB;
+            case ADJECTIVE:
+                return INDEX_ADJECTIVE;
+        }
+        throw new IllegalStateException("This should not happen.");
+    }
 
-	/**
-	 * Use this convenience method to retrieve the appropriate
-	 * {@code ISynset} content type for the specified POS.
-	 *
-	 * @param pos the part of speech for the content type, may not be
-	 *            <code>null</code>
-	 * @return the index content type for the specified part of speech
-	 * @throws NullPointerException if the specified part of speech is <code>null</code>
-	 * @since JWI 2.0.0
-	 */
-	public static IContentType<ISynset> getDataContentType(POS pos)
-	{
-		if (pos == null)
-			throw new NullPointerException();
-		switch (pos)
-		{
-			case NOUN:
-				return DATA_NOUN;
-			case VERB:
-				return DATA_VERB;
-			case ADVERB:
-				return DATA_ADVERB;
-			case ADJECTIVE:
-				return DATA_ADJECTIVE;
-		}
-		throw new IllegalStateException("How in the world did we get here?");
-	}
+    /**
+     * Use this convenience method to retrieve the appropriate
+     * {@code ISynset} content type for the specified POS.
+     *
+     * @param pos the part of speech for the content type, may not be
+     *            <code>null</code>
+     * @return the index content type for the specified part of speech
+     * @throws NullPointerException if the specified part of speech is <code>null</code>
+     * @since JWI 2.0.0
+     */
+    public static IContentType<ISynset> getDataContentType(POS pos)
+    {
+        if (pos == null)
+            throw new NullPointerException();
+        switch (pos)
+        {
+            case NOUN:
+                return DATA_NOUN;
+            case VERB:
+                return DATA_VERB;
+            case ADVERB:
+                return DATA_ADVERB;
+            case ADJECTIVE:
+                return DATA_ADJECTIVE;
+        }
+        throw new IllegalStateException("How in the world did we get here?");
+    }
 
-	/**
-	 * Use this convenience method to retrieve the appropriate
-	 * {@code IExceptionEntryProxy} content type for the specified POS.
-	 *
-	 * @param pos the part of speech for the content type, may not be
-	 *            <code>null</code>
-	 * @return the index content type for the specified part of speech
-	 * @throws NullPointerException if the specified part of speech is <code>null</code>
-	 * @since JWI 2.0.0
-	 */
-	public static IContentType<IExceptionEntryProxy> getExceptionContentType(POS pos)
-	{
-		if (pos == null)
-			throw new NullPointerException();
-		switch (pos)
-		{
-			case NOUN:
-				return EXCEPTION_NOUN;
-			case VERB:
-				return EXCEPTION_VERB;
-			case ADVERB:
-				return EXCEPTION_ADVERB;
-			case ADJECTIVE:
-				return EXCEPTION_ADJECTIVE;
-		}
-		throw new IllegalStateException("Great Scott, there's been a rupture in the space-time continuum!");
-	}
+    /**
+     * Use this convenience method to retrieve the appropriate
+     * {@code IExceptionEntryProxy} content type for the specified POS.
+     *
+     * @param pos the part of speech for the content type, may not be
+     *            <code>null</code>
+     * @return the index content type for the specified part of speech
+     * @throws NullPointerException if the specified part of speech is <code>null</code>
+     * @since JWI 2.0.0
+     */
+    public static IContentType<IExceptionEntryProxy> getExceptionContentType(POS pos)
+    {
+        if (pos == null)
+            throw new NullPointerException();
+        switch (pos)
+        {
+            case NOUN:
+                return EXCEPTION_NOUN;
+            case VERB:
+                return EXCEPTION_VERB;
+            case ADVERB:
+                return EXCEPTION_ADVERB;
+            case ADJECTIVE:
+                return EXCEPTION_ADJECTIVE;
+        }
+        throw new IllegalStateException("Great Scott, there's been a rupture in the space-time continuum!");
+    }
 }

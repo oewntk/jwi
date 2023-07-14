@@ -48,620 +48,620 @@ import java.util.concurrent.locks.ReentrantLock;
 public abstract class WordnetFile<T> implements ILoadableDataSource<T>
 {
 
-	// fields set on construction
-	private final String name;
-	private final IContentType<T> type;
-	private final ICommentDetector detector;
-	private final File file;
+    // fields set on construction
+    private final String name;
+    private final IContentType<T> type;
+    private final ICommentDetector detector;
+    private final File file;
 
-	// loading locks and status flag
-	// the flag is marked transient to avoid different values in different threads 
-	private transient boolean isLoaded = false;
-	private final Lock lifecycleLock = new ReentrantLock();
-	private final Lock loadingLock = new ReentrantLock();
+    // loading locks and status flag
+    // the flag is marked transient to avoid different values in different threads
+    private transient boolean isLoaded = false;
+    private final Lock lifecycleLock = new ReentrantLock();
+    private final Lock loadingLock = new ReentrantLock();
 
-	// fields generated dynamically on demand
-	private FileChannel channel;
-	private ByteBuffer buffer;
-	private IVersion version;
+    // fields generated dynamically on demand
+    private FileChannel channel;
+    private ByteBuffer buffer;
+    private IVersion version;
 
-	/**
-	 * Constructs an instance of this class backed by the specified java
-	 * {@code File} object, with the specified content type. No effort is made
-	 * to ensure that the data in the specified file is actually formatted in
-	 * the proper manner for the line parser associated with the content type's
-	 * data type. If these are mismatched, this will result in
-	 * {@code MisformattedLineExceptions} in later calls.
-	 *
-	 * @param file        the file which backs this wordnet file; may not be
-	 *                    <code>null</code>
-	 * @param contentType the content type for this file; may not be <code>null</code>
-	 * @throws NullPointerException if the specified file or content type is <code>null</code>
-	 * @since JWI 1.0
-	 */
-	public WordnetFile(File file, IContentType<T> contentType)
-	{
-		if (contentType == null)
-			throw new NullPointerException();
-		this.name = file.getName();
-		this.file = file;
-		this.type = contentType;
-		this.detector = type.getLineComparator().getCommentDetector();
-	}
+    /**
+     * Constructs an instance of this class backed by the specified java
+     * {@code File} object, with the specified content type. No effort is made
+     * to ensure that the data in the specified file is actually formatted in
+     * the proper manner for the line parser associated with the content type's
+     * data type. If these are mismatched, this will result in
+     * {@code MisformattedLineExceptions} in later calls.
+     *
+     * @param file        the file which backs this wordnet file; may not be
+     *                    <code>null</code>
+     * @param contentType the content type for this file; may not be <code>null</code>
+     * @throws NullPointerException if the specified file or content type is <code>null</code>
+     * @since JWI 1.0
+     */
+    public WordnetFile(File file, IContentType<T> contentType)
+    {
+        if (contentType == null)
+            throw new NullPointerException();
+        this.name = file.getName();
+        this.file = file;
+        this.type = contentType;
+        this.detector = type.getLineComparator().getCommentDetector();
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.edu.mit.jwi.data.IDataSource#getName()
-	 */
-	public String getName()
-	{
-		return name;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see edu.edu.mit.jwi.data.IDataSource#getName()
+     */
+    public String getName()
+    {
+        return name;
+    }
 
-	/**
-	 * Returns the file which backs this object.
-	 *
-	 * @return the file which backs this object, should never return
-	 * <code>null</code>
-	 * @since JWI 2.2.0
-	 */
-	public File getFile()
-	{
-		return file;
-	}
+    /**
+     * Returns the file which backs this object.
+     *
+     * @return the file which backs this object, should never return
+     * <code>null</code>
+     * @since JWI 2.2.0
+     */
+    public File getFile()
+    {
+        return file;
+    }
 
-	/**
-	 * Returns the buffer which backs this object.
-	 *
-	 * @return the buffer which backs this object
-	 * @throws ObjectClosedException if the object is closed
-	 * @since JWI 2.2.0
-	 */
-	public ByteBuffer getBuffer()
-	{
-		if (!isOpen())
-			throw new ObjectClosedException();
-		return buffer;
-	}
+    /**
+     * Returns the buffer which backs this object.
+     *
+     * @return the buffer which backs this object
+     * @throws ObjectClosedException if the object is closed
+     * @since JWI 2.2.0
+     */
+    public ByteBuffer getBuffer()
+    {
+        if (!isOpen())
+            throw new ObjectClosedException();
+        return buffer;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.edu.mit.jwi.data.IDataSource#getContentType()
-	 */
-	public IContentType<T> getContentType()
-	{
-		return type;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see edu.edu.mit.jwi.data.IDataSource#getContentType()
+     */
+    public IContentType<T> getContentType()
+    {
+        return type;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.edu.mit.jwi.data.IHasLifecycle#open()
-	 */
-	public boolean open() throws IOException
-	{
-		try
-		{
-			lifecycleLock.lock();
-			if (isOpen())
-				return true;
-			@SuppressWarnings("resource") RandomAccessFile raFile = new RandomAccessFile(file, "r");
-			channel = raFile.getChannel();
-			buffer = channel.map(FileChannel.MapMode.READ_ONLY, 0, file.length());
-			return true;
-		}
-		finally
-		{
-			lifecycleLock.unlock();
-		}
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see edu.edu.mit.jwi.data.IHasLifecycle#open()
+     */
+    public boolean open() throws IOException
+    {
+        try
+        {
+            lifecycleLock.lock();
+            if (isOpen())
+                return true;
+            @SuppressWarnings("resource") RandomAccessFile raFile = new RandomAccessFile(file, "r");
+            channel = raFile.getChannel();
+            buffer = channel.map(FileChannel.MapMode.READ_ONLY, 0, file.length());
+            return true;
+        }
+        finally
+        {
+            lifecycleLock.unlock();
+        }
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.edu.mit.jwi.data.IHasLifecycle#isOpen()
-	 */
-	public boolean isOpen()
-	{
-		try
-		{
-			lifecycleLock.lock();
-			return buffer != null;
-		}
-		finally
-		{
-			lifecycleLock.unlock();
-		}
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see edu.edu.mit.jwi.data.IHasLifecycle#isOpen()
+     */
+    public boolean isOpen()
+    {
+        try
+        {
+            lifecycleLock.lock();
+            return buffer != null;
+        }
+        finally
+        {
+            lifecycleLock.unlock();
+        }
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.edu.mit.jwi.data.IClosable#close()
-	 */
-	public void close()
-	{
-		try
-		{
-			lifecycleLock.lock();
-			version = null;
-			buffer = null;
-			isLoaded = false;
-			if (channel != null)
-			{
-				try
-				{
-					channel.close();
-				}
-				catch (IOException e)
-				{
-					e.printStackTrace();
-				}
-			}
-			channel = null;
-		}
-		finally
-		{
-			lifecycleLock.unlock();
-		}
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see edu.edu.mit.jwi.data.IClosable#close()
+     */
+    public void close()
+    {
+        try
+        {
+            lifecycleLock.lock();
+            version = null;
+            buffer = null;
+            isLoaded = false;
+            if (channel != null)
+            {
+                try
+                {
+                    channel.close();
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+            channel = null;
+        }
+        finally
+        {
+            lifecycleLock.unlock();
+        }
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.edu.mit.jwi.data.ILoadable#isLoaded()
-	 */
-	public boolean isLoaded()
-	{
-		return isLoaded;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see edu.edu.mit.jwi.data.ILoadable#isLoaded()
+     */
+    public boolean isLoaded()
+    {
+        return isLoaded;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.edu.mit.jwi.data.ILoadable#load()
-	 */
-	public void load()
-	{
-		load(false);
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see edu.edu.mit.jwi.data.ILoadable#load()
+     */
+    public void load()
+    {
+        load(false);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.edu.mit.jwi.data.ILoadable#load(boolean)
-	 */
-	public void load(boolean block)
-	{
-		try
-		{
-			loadingLock.lock();
-			int len = (int) file.length();
-			ByteBuffer buf = buffer.asReadOnlyBuffer();
-			buf.clear();
-			byte[] data = new byte[len];
-			buf.get(data, 0, len);
+    /*
+     * (non-Javadoc)
+     *
+     * @see edu.edu.mit.jwi.data.ILoadable#load(boolean)
+     */
+    public void load(boolean block)
+    {
+        try
+        {
+            loadingLock.lock();
+            int len = (int) file.length();
+            ByteBuffer buf = buffer.asReadOnlyBuffer();
+            buf.clear();
+            byte[] data = new byte[len];
+            buf.get(data, 0, len);
 
-			try
-			{
-				lifecycleLock.lock();
-				if (channel != null)
-				{
-					try
-					{
-						channel.close();
-					}
-					catch (IOException e)
-					{
-						e.printStackTrace();
-					}
-					channel = null;
-				}
-				if (buffer != null)
-				{
-					buffer = ByteBuffer.wrap(data);
-					isLoaded = true;
-				}
-			}
-			finally
-			{
-				lifecycleLock.unlock();
-			}
-		}
-		finally
-		{
-			loadingLock.unlock();
-		}
-	}
+            try
+            {
+                lifecycleLock.lock();
+                if (channel != null)
+                {
+                    try
+                    {
+                        channel.close();
+                    }
+                    catch (IOException e)
+                    {
+                        e.printStackTrace();
+                    }
+                    channel = null;
+                }
+                if (buffer != null)
+                {
+                    buffer = ByteBuffer.wrap(data);
+                    isLoaded = true;
+                }
+            }
+            finally
+            {
+                lifecycleLock.unlock();
+            }
+        }
+        finally
+        {
+            loadingLock.unlock();
+        }
+    }
 
-	/**
-	 * Returns the wordnet version associated with this object, or null if the
-	 * version cannot be determined.
-	 *
-	 * @return the wordnet version associated with this object, or null if the
-	 * version cannot be determined
-	 * @throws ObjectClosedException if the object is closed when this method is called
-	 * @see edu.mit.jwi.item.IHasVersion#getVersion()
-	 */
-	public IVersion getVersion()
-	{
-		if (!isOpen())
-			throw new ObjectClosedException();
-		if (version == null)
-		{
-			version = Version.extractVersion(type, buffer.asReadOnlyBuffer());
-			if (version == null)
-				version = IVersion.NO_VERSION;
-		}
-		return (version == IVersion.NO_VERSION) ? null : version;
-	}
+    /**
+     * Returns the wordnet version associated with this object, or null if the
+     * version cannot be determined.
+     *
+     * @return the wordnet version associated with this object, or null if the
+     * version cannot be determined
+     * @throws ObjectClosedException if the object is closed when this method is called
+     * @see edu.mit.jwi.item.IHasVersion#getVersion()
+     */
+    public IVersion getVersion()
+    {
+        if (!isOpen())
+            throw new ObjectClosedException();
+        if (version == null)
+        {
+            version = Version.extractVersion(type, buffer.asReadOnlyBuffer());
+            if (version == null)
+                version = IVersion.NO_VERSION;
+        }
+        return (version == IVersion.NO_VERSION) ? null : version;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see java.lang.Iterable#iterator()
-	 */
-	public LineIterator iterator()
-	{
-		if (!isOpen())
-			throw new ObjectClosedException();
-		return makeIterator(getBuffer(), null);
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Iterable#iterator()
+     */
+    public LineIterator iterator()
+    {
+        if (!isOpen())
+            throw new ObjectClosedException();
+        return makeIterator(getBuffer(), null);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.edu.mit.jwi.data.IDataSource#iterator(java.lang.String)
-	 */
-	public LineIterator iterator(String key)
-	{
-		if (!isOpen())
-			throw new ObjectClosedException();
-		return makeIterator(getBuffer(), key);
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see edu.edu.mit.jwi.data.IDataSource#iterator(java.lang.String)
+     */
+    public LineIterator iterator(String key)
+    {
+        if (!isOpen())
+            throw new ObjectClosedException();
+        return makeIterator(getBuffer(), key);
+    }
 
-	/**
-	 * Constructs an iterator that can be used to iterate over the specified
-	 * {@link ByteBuffer}, starting from the specified key.
-	 *
-	 * @param buffer the buffer over which the iterator will iterate, should not be
-	 *               <code>null</code>
-	 * @param key    the key at which the iterator should begin, should not be
-	 *               <code>null</code>
-	 * @return an iterator that can be used to iterate over the lines of the
-	 * {@link ByteBuffer}
-	 * @since JWI 2.2.0
-	 */
-	public abstract LineIterator makeIterator(ByteBuffer buffer, String key);
+    /**
+     * Constructs an iterator that can be used to iterate over the specified
+     * {@link ByteBuffer}, starting from the specified key.
+     *
+     * @param buffer the buffer over which the iterator will iterate, should not be
+     *               <code>null</code>
+     * @param key    the key at which the iterator should begin, should not be
+     *               <code>null</code>
+     * @return an iterator that can be used to iterate over the lines of the
+     * {@link ByteBuffer}
+     * @since JWI 2.2.0
+     */
+    public abstract LineIterator makeIterator(ByteBuffer buffer, String key);
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see java.lang.Object#hashCode()
-	 */
-	public int hashCode()
-	{
-		final int PRIME = 31;
-		int result = 1;
-		result = PRIME * result + type.hashCode();
-		result = PRIME * result + file.hashCode();
-		return result;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#hashCode()
+     */
+    public int hashCode()
+    {
+        final int PRIME = 31;
+        int result = 1;
+        result = PRIME * result + type.hashCode();
+        result = PRIME * result + file.hashCode();
+        return result;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	public boolean equals(Object obj)
-	{
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		final WordnetFile<?> other = (WordnetFile<?>) obj;
-		if (!type.equals(other.type))
-			return false;
-		return file.equals(other.file);
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    public boolean equals(Object obj)
+    {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        final WordnetFile<?> other = (WordnetFile<?>) obj;
+        if (!type.equals(other.type))
+            return false;
+        return file.equals(other.file);
+    }
 
-	/**
-	 * Returns the String from the current position up to, but not including,
-	 * the next newline. The buffer's position is set to either directly after
-	 * the next newline, or the end of the buffer. If the buffer is at its
-	 * limit, the method returns null. If the buffer's position is directly
-	 * before a valid newline marker (either \n, \r, or \r\n), then the method
-	 * returns an empty string.
-	 *
-	 * @param buf the buffer from which the line should be extracted
-	 * @return the remainder of line in the specified buffer, starting from the
-	 * buffer's current position
-	 * @throws NullPointerException if the specified buffer is <code>null</code>
-	 * @since JWI 2.1.0
-	 */
-	public static String getLine(ByteBuffer buf)
-	{
-		// we are at end of buffer, return null
-		int limit = buf.limit();
-		if (buf.position() == limit)
-			return null;
+    /**
+     * Returns the String from the current position up to, but not including,
+     * the next newline. The buffer's position is set to either directly after
+     * the next newline, or the end of the buffer. If the buffer is at its
+     * limit, the method returns null. If the buffer's position is directly
+     * before a valid newline marker (either \n, \r, or \r\n), then the method
+     * returns an empty string.
+     *
+     * @param buf the buffer from which the line should be extracted
+     * @return the remainder of line in the specified buffer, starting from the
+     * buffer's current position
+     * @throws NullPointerException if the specified buffer is <code>null</code>
+     * @since JWI 2.1.0
+     */
+    public static String getLine(ByteBuffer buf)
+    {
+        // we are at end of buffer, return null
+        int limit = buf.limit();
+        if (buf.position() == limit)
+            return null;
 
-		StringBuilder input = new StringBuilder();
-		char c;
-		boolean eol = false;
+        StringBuilder input = new StringBuilder();
+        char c;
+        boolean eol = false;
 
-		while (!eol && buf.position() < limit)
-		{
-			c = (char) buf.get();
-			switch (c)
-			{
-				case '\n':
-					eol = true;
-					break;
-				case '\r':
-					eol = true;
-					int cur = buf.position();
-					c = (char) buf.get();
-					if (c != '\n')
-						buf.position(cur);
-					break;
-				default:
-					input.append(c);
-					break;
-			}
-		}
-		return input.toString();
-	}
+        while (!eol && buf.position() < limit)
+        {
+            c = (char) buf.get();
+            switch (c)
+            {
+                case '\n':
+                    eol = true;
+                    break;
+                case '\r':
+                    eol = true;
+                    int cur = buf.position();
+                    c = (char) buf.get();
+                    if (c != '\n')
+                        buf.position(cur);
+                    break;
+                default:
+                    input.append(c);
+                    break;
+            }
+        }
+        return input.toString();
+    }
 
-	/**
-	 * A different version of the getLine method that uses a specified character
-	 * set to decode the byte stream. If the provided character set is
-	 * <code>null</code>, the method defaults to the previous method
-	 * {@link #getLine(ByteBuffer)}.
-	 *
-	 * @param buf the buffer from which the line should be extracted
-	 * @param cs  the character set to use for decoding; may be
-	 *            <code>null</code>
-	 * @return the remainder of line in the specified buffer, starting from the
-	 * buffer's current position
-	 * @throws NullPointerException if the specified buffer is <code>null</code>
-	 * @since JWI 2.3.4
-	 */
-	public static String getLine(ByteBuffer buf, Charset cs)
-	{
-		// redirect to old method if no charset specified
-		if (cs == null)
-			return getLine(buf);
+    /**
+     * A different version of the getLine method that uses a specified character
+     * set to decode the byte stream. If the provided character set is
+     * <code>null</code>, the method defaults to the previous method
+     * {@link #getLine(ByteBuffer)}.
+     *
+     * @param buf the buffer from which the line should be extracted
+     * @param cs  the character set to use for decoding; may be
+     *            <code>null</code>
+     * @return the remainder of line in the specified buffer, starting from the
+     * buffer's current position
+     * @throws NullPointerException if the specified buffer is <code>null</code>
+     * @since JWI 2.3.4
+     */
+    public static String getLine(ByteBuffer buf, Charset cs)
+    {
+        // redirect to old method if no charset specified
+        if (cs == null)
+            return getLine(buf);
 
-		// if we are at end of buffer, return null
-		int limit = buf.limit();
-		if (buf.position() == limit)
-			return null;
+        // if we are at end of buffer, return null
+        int limit = buf.limit();
+        if (buf.position() == limit)
+            return null;
 
-		// here we assume that in the character set of the buffer
-		// new lines are encoded using the standard ASCII encoding scheme
-		// e.g., the single bytes 0x0A or 0x0D, or the two-byte sequence
-		// 0x0D0A.  If the byte buffer doesn't follow these conventions,
-		// this method will fail.
-		byte b;
-		boolean eol = false;
-		int start = buf.position();
-		int end = start;
-		while (!eol && buf.position() < limit)
-		{
-			b = buf.get();
-			switch (b)
-			{
-				case 0x0A: // newline \n = 0x0A = 10
-					eol = true;
-					break;
-				case 0x0D: // carriage return \r = 0x0D = 13
-					eol = true;
-					int cur = buf.position();
-					b = buf.get();
-					if (b != 0x0A) // check for following newline
-						buf.position(cur);
-					break;
-				default:
-					end++;
-			}
-		}
+        // here we assume that in the character set of the buffer
+        // new lines are encoded using the standard ASCII encoding scheme
+        // e.g., the single bytes 0x0A or 0x0D, or the two-byte sequence
+        // 0x0D0A.  If the byte buffer doesn't follow these conventions,
+        // this method will fail.
+        byte b;
+        boolean eol = false;
+        int start = buf.position();
+        int end = start;
+        while (!eol && buf.position() < limit)
+        {
+            b = buf.get();
+            switch (b)
+            {
+                case 0x0A: // newline \n = 0x0A = 10
+                    eol = true;
+                    break;
+                case 0x0D: // carriage return \r = 0x0D = 13
+                    eol = true;
+                    int cur = buf.position();
+                    b = buf.get();
+                    if (b != 0x0A) // check for following newline
+                        buf.position(cur);
+                    break;
+                default:
+                    end++;
+            }
+        }
 
-		// get sub view containing only the bytes of interest
-		// cast is necessary (jdk9 #114)
-		buf = (ByteBuffer) buf.duplicate().position(start).limit(end);
+        // get sub view containing only the bytes of interest
+        // cast is necessary (jdk9 #114)
+        buf = (ByteBuffer) buf.duplicate().position(start).limit(end);
 
-		// decode the buffer using the provided character set
-		return cs.decode(buf).toString();
-	}
+        // decode the buffer using the provided character set
+        return cs.decode(buf).toString();
+    }
 
-	/**
-	 * Rewinds the specified buffer to the beginning of the current line.
-	 *
-	 * @param buf the buffer to be rewound; may not be <code>null</code>
-	 * @throws NullPointerException if the specified buffer is <code>null</code>
-	 * @since JWI 2.2.0
-	 */
-	public static void rewindToLineStart(ByteBuffer buf)
-	{
-		int i = buf.position();
+    /**
+     * Rewinds the specified buffer to the beginning of the current line.
+     *
+     * @param buf the buffer to be rewound; may not be <code>null</code>
+     * @throws NullPointerException if the specified buffer is <code>null</code>
+     * @since JWI 2.2.0
+     */
+    public static void rewindToLineStart(ByteBuffer buf)
+    {
+        int i = buf.position();
 
-		// check if the buffer is set in the middle of two-char
-		// newline marker; if so, back up before it begins
-		if (buf.get(i - 1) == '\r' && buf.get(i) == '\n')
-			i--;
+        // check if the buffer is set in the middle of two-char
+        // newline marker; if so, back up before it begins
+        if (buf.get(i - 1) == '\r' && buf.get(i) == '\n')
+            i--;
 
-		// start looking at the character just before
-		// the one at which the buffer is set
-		if (i > 0)
-			i--;
+        // start looking at the character just before
+        // the one at which the buffer is set
+        if (i > 0)
+            i--;
 
-		// walk backwards until we find a newline;
-		// if we find a carriage return (CR) or a 
-		// linefeed (LF), this must be the end of the 
-		// previous line (either \n, \r, or \r\n)
-		char c;
-		for (; i > 0; i--)
-		{
-			c = (char) buf.get(i);
-			if (c == '\n' || c == '\r')
-			{
-				i++;
-				break;
-			}
-		}
+        // walk backwards until we find a newline;
+        // if we find a carriage return (CR) or a
+        // linefeed (LF), this must be the end of the
+        // previous line (either \n, \r, or \r\n)
+        char c;
+        for (; i > 0; i--)
+        {
+            c = (char) buf.get(i);
+            if (c == '\n' || c == '\r')
+            {
+                i++;
+                break;
+            }
+        }
 
-		// set the buffer to the beginning of the line
-		buf.position(i);
-	}
+        // set the buffer to the beginning of the line
+        buf.position(i);
+    }
 
-	/**
-	 * Used to iterate over lines in a file. It is a look-ahead iterator. This
-	 * iterator does not support the remove method; if that method is called, it
-	 * throws an {@link UnsupportedOperationException}.
-	 *
-	 * @author Mark A. Finlayson
-	 * @version 2.4.0
-	 * @since JWI 1.0
-	 */
-	protected abstract class LineIterator implements Iterator<String>
-	{
-		// fields set on construction
-		protected final ByteBuffer parentBuffer;
-		protected ByteBuffer itrBuffer;
-		protected String next;
+    /**
+     * Used to iterate over lines in a file. It is a look-ahead iterator. This
+     * iterator does not support the remove method; if that method is called, it
+     * throws an {@link UnsupportedOperationException}.
+     *
+     * @author Mark A. Finlayson
+     * @version 2.4.0
+     * @since JWI 1.0
+     */
+    protected abstract class LineIterator implements Iterator<String>
+    {
+        // fields set on construction
+        protected final ByteBuffer parentBuffer;
+        protected ByteBuffer itrBuffer;
+        protected String next;
 
-		/**
-		 * Constructs a new line iterator over this buffer, starting at the
-		 * specified key.
-		 *
-		 * @param buffer the buffer over which the iterator should iterator; may
-		 *               not be <code>null</code>
-		 * @param key    the key of the line to start at; may be <code>null</code>
-		 * @throws NullPointerException if the specified buffer is <code>null</code>
-		 * @since JWI 1.0
-		 */
-		public LineIterator(ByteBuffer buffer, String key)
-		{
-			parentBuffer = buffer;
-			itrBuffer = buffer.asReadOnlyBuffer();
-			itrBuffer.clear();
-			key = (key == null) ? null : key.trim();
-			if (key == null || key.length() == 0)
-			{
-				advance();
-			}
-			else
-			{
-				findFirstLine(key);
-			}
-		}
+        /**
+         * Constructs a new line iterator over this buffer, starting at the
+         * specified key.
+         *
+         * @param buffer the buffer over which the iterator should iterator; may
+         *               not be <code>null</code>
+         * @param key    the key of the line to start at; may be <code>null</code>
+         * @throws NullPointerException if the specified buffer is <code>null</code>
+         * @since JWI 1.0
+         */
+        public LineIterator(ByteBuffer buffer, String key)
+        {
+            parentBuffer = buffer;
+            itrBuffer = buffer.asReadOnlyBuffer();
+            itrBuffer.clear();
+            key = (key == null) ? null : key.trim();
+            if (key == null || key.length() == 0)
+            {
+                advance();
+            }
+            else
+            {
+                findFirstLine(key);
+            }
+        }
 
-		/**
-		 * Returns the line currently stored as the 'next' line, if any. Is a
-		 * pure getter; does not increment the iterator.
-		 *
-		 * @return the next line that will be parsed and returned by this
-		 * iterator, or <code>null</code> if none
-		 * @since JWI 2.2.0
-		 */
-		public String getNextLine()
-		{
-			return next;
-		}
+        /**
+         * Returns the line currently stored as the 'next' line, if any. Is a
+         * pure getter; does not increment the iterator.
+         *
+         * @return the next line that will be parsed and returned by this
+         * iterator, or <code>null</code> if none
+         * @since JWI 2.2.0
+         */
+        public String getNextLine()
+        {
+            return next;
+        }
 
-		/**
-		 * Advances the iterator the first line the iterator should return,
-		 * based on the specified key. If the key is not found in the file, it
-		 * will advance the iterator past all lines.
-		 *
-		 * @param key the key indexed the first line to be returned by the
-		 *            iterator
-		 * @since JWI 1.0
-		 */
-		protected abstract void findFirstLine(String key);
+        /**
+         * Advances the iterator the first line the iterator should return,
+         * based on the specified key. If the key is not found in the file, it
+         * will advance the iterator past all lines.
+         *
+         * @param key the key indexed the first line to be returned by the
+         *            iterator
+         * @since JWI 1.0
+         */
+        protected abstract void findFirstLine(String key);
 
-		/*
-		 * (non-Javadoc)
-		 *
-		 * @see java.util.Iterator#hasNext()
-		 */
-		public boolean hasNext()
-		{
-			return next != null;
-		}
+        /*
+         * (non-Javadoc)
+         *
+         * @see java.util.Iterator#hasNext()
+         */
+        public boolean hasNext()
+        {
+            return next != null;
+        }
 
-		/**
-		 * Skips over comment lines to find the next line that would be returned
-		 * by the iterator in a call to {@link #next()}.
-		 *
-		 * @since JWI 1.0
-		 */
-		protected void advance()
-		{
-			next = null;
+        /**
+         * Skips over comment lines to find the next line that would be returned
+         * by the iterator in a call to {@link #next()}.
+         *
+         * @since JWI 1.0
+         */
+        protected void advance()
+        {
+            next = null;
 
-			// check for buffer swap
-			if (parentBuffer != buffer)
-			{
-				int pos = itrBuffer.position();
-				ByteBuffer newBuf = buffer.asReadOnlyBuffer();
-				newBuf.clear();
-				newBuf.position(pos);
-				itrBuffer = newBuf;
-			}
+            // check for buffer swap
+            if (parentBuffer != buffer)
+            {
+                int pos = itrBuffer.position();
+                ByteBuffer newBuf = buffer.asReadOnlyBuffer();
+                newBuf.clear();
+                newBuf.position(pos);
+                itrBuffer = newBuf;
+            }
 
-			String line;
-			do
-			{
-				line = getLine(itrBuffer, type.getCharset());
-			}
-			while (line != null && isComment(line));
-			next = line;
-		}
+            String line;
+            do
+            {
+                line = getLine(itrBuffer, type.getCharset());
+            }
+            while (line != null && isComment(line));
+            next = line;
+        }
 
-		/**
-		 * Returns <code>true</code> if the specified line is a comment;
-		 * <code>false</code> otherwise
-		 *
-		 * @param line the line to be tested
-		 * @return <code>true</code> if the specified line is a comment;
-		 * <code>false</code> otherwise
-		 * @since JWI 1.0
-		 */
-		protected boolean isComment(String line)
-		{
-			if (detector == null)
-				return false;
-			return detector.isCommentLine(line);
-		}
+        /**
+         * Returns <code>true</code> if the specified line is a comment;
+         * <code>false</code> otherwise
+         *
+         * @param line the line to be tested
+         * @return <code>true</code> if the specified line is a comment;
+         * <code>false</code> otherwise
+         * @since JWI 1.0
+         */
+        protected boolean isComment(String line)
+        {
+            if (detector == null)
+                return false;
+            return detector.isCommentLine(line);
+        }
 
-		/*
-		 * (non-Javadoc)
-		 *
-		 * @see java.util.Iterator#next()
-		 */
-		public String next()
-		{
-			if (next == null)
-				throw new NoSuchElementException();
-			String result = next;
-			advance();
-			return result;
-		}
+        /*
+         * (non-Javadoc)
+         *
+         * @see java.util.Iterator#next()
+         */
+        public String next()
+        {
+            if (next == null)
+                throw new NoSuchElementException();
+            String result = next;
+            advance();
+            return result;
+        }
 
-		/*
-		 * (non-Javadoc)
-		 *
-		 * @see java.util.Iterator#remove()
-		 */
-		public final void remove()
-		{
-			throw new UnsupportedOperationException();
-		}
-	}
+        /*
+         * (non-Javadoc)
+         *
+         * @see java.util.Iterator#remove()
+         */
+        public final void remove()
+        {
+            throw new UnsupportedOperationException();
+        }
+    }
 }

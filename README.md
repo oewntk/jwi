@@ -14,9 +14,9 @@ Ported to **Java 8** with lambda expressions.
 Extensive JUnit testing (see test classes).
 
 Added Maven support.
-    
+
 GroupID and ArtifactID on Maven Central:
-	
+
 	<groupId>io.github.oewntk</groupId>
 	<artifactId>jwi</artifactId>
 	<packaging>jar</packaging>

@@ -33,26 +33,26 @@ import edu.mit.jwi.item.IHasPOS;
 public interface IContentType<T> extends IHasPOS, IHasCharset
 {
 
-	/**
-	 * Returns the assigned resource type of this object. This method may not
-	 * return <code>null</code>
-	 *
-	 * @return the data type object representing the resource type for this
-	 * content type
-	 * @since JWI 1.0
-	 */
-	IDataType<T> getDataType();
+    /**
+     * Returns the assigned resource type of this object. This method may not
+     * return <code>null</code>
+     *
+     * @return the data type object representing the resource type for this
+     * content type
+     * @since JWI 1.0
+     */
+    IDataType<T> getDataType();
 
-	/**
-	 * Returns a comparator that can be used to determine ordering between
-	 * different lines of data in the resource. This is used for searching. If
-	 * the data in the resource is not ordered, then this method returns
-	 * <code>null</code>.
-	 *
-	 * @return a comparator that imposes an ordering on the lines in the data
-	 * file; or <code>null</code> if there is no comparator
-	 * @since JWI 1.0
-	 */
-	ILineComparator getLineComparator();
+    /**
+     * Returns a comparator that can be used to determine ordering between
+     * different lines of data in the resource. This is used for searching. If
+     * the data in the resource is not ordered, then this method returns
+     * <code>null</code>.
+     *
+     * @return a comparator that imposes an ordering on the lines in the data
+     * file; or <code>null</code> if there is no comparator
+     * @since JWI 1.0
+     */
+    ILineComparator getLineComparator();
 
 }
