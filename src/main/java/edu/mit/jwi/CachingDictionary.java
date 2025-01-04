@@ -29,707 +29,708 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class CachingDictionary implements ICachingDictionary
 {
-	// final instance fields 
-	private final IDictionary backing;
-	private final IItemCache cache;
 
-	/**
-	 * Constructs a new caching dictionary that caches the results of the
-	 * specified backing dictionary
-	 *
-	 * @param backing the dictionary whose results should be cached
-	 * @since JWI 2.2.0
-	 */
-	public CachingDictionary(IDictionary backing)
-	{
-		if (backing == null)
-			throw new NullPointerException();
-		this.cache = createCache();
-		this.backing = backing;
-	}
+    // final instance fields
+    private final IDictionary backing;
+    private final IItemCache cache;
 
-	/**
-	 * Returns the dictionary that is wrapped by this dictionary; will never
-	 * return <code>null</code>
-	 *
-	 * @return the dictionary that is wrapped by this dictionary
-	 * @since JWI 2.2.0
-	 */
-	public IDictionary getBackingDictionary()
-	{
-		return backing;
-	}
+    /**
+     * Constructs a new caching dictionary that caches the results of the
+     * specified backing dictionary
+     *
+     * @param backing the dictionary whose results should be cached
+     * @since JWI 2.2.0
+     */
+    public CachingDictionary(IDictionary backing)
+    {
+        if (backing == null)
+            throw new NullPointerException();
+        this.cache = createCache();
+        this.backing = backing;
+    }
 
-	/**
-	 * This operation creates the cache that is used by the dictionary. It is
-	 * set inside its own method for ease of subclassing. It is called only
-	 * when an instance of this class is created. It is marked protected for
-	 * ease of subclassing.
-	 *
-	 * @return the item cache to be used by this dictionary
-	 * @since JWI 2.2.0
-	 */
-	protected IItemCache createCache()
-	{
-		return new ItemCache();
-	}
+    /**
+     * Returns the dictionary that is wrapped by this dictionary; will never
+     * return <code>null</code>
+     *
+     * @return the dictionary that is wrapped by this dictionary
+     * @since JWI 2.2.0
+     */
+    public IDictionary getBackingDictionary()
+    {
+        return backing;
+    }
 
-	/**
-	 * An internal method for assuring compliance with the dictionary interface
-	 * that says that methods will throw {@code ObjectClosedException}s if
-	 * the dictionary has not yet been opened.
-	 *
-	 * @throws ObjectClosedException if the dictionary is closed.
-	 * @since JWI 2.2.0
-	 */
-	protected void checkOpen()
-	{
-		if (isOpen())
-		{
-			if (!getCache().isOpen())
-			{
-				try
-				{
-					getCache().open();
-				}
-				catch (IOException e)
-				{
-					throw new ObjectClosedException(e);
-				}
-			}
-		}
-		else
-		{
-			if (getCache().isOpen())
-				getCache().close();
-			throw new ObjectClosedException();
-		}
-	}
+    /**
+     * This operation creates the cache that is used by the dictionary. It is
+     * set inside its own method for ease of subclassing. It is called only
+     * when an instance of this class is created. It is marked protected for
+     * ease of subclassing.
+     *
+     * @return the item cache to be used by this dictionary
+     * @since JWI 2.2.0
+     */
+    protected IItemCache createCache()
+    {
+        return new ItemCache();
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.mit.jwi.ICachingDictionary#getCache()
-	 */
-	public IItemCache getCache()
-	{
-		return cache;
-	}
+    /**
+     * An internal method for assuring compliance with the dictionary interface
+     * that says that methods will throw {@code ObjectClosedException}s if
+     * the dictionary has not yet been opened.
+     *
+     * @throws ObjectClosedException if the dictionary is closed.
+     * @since JWI 2.2.0
+     */
+    protected void checkOpen()
+    {
+        if (isOpen())
+        {
+            if (!getCache().isOpen())
+            {
+                try
+                {
+                    getCache().open();
+                }
+                catch (IOException e)
+                {
+                    throw new ObjectClosedException(e);
+                }
+            }
+        }
+        else
+        {
+            if (getCache().isOpen())
+                getCache().close();
+            throw new ObjectClosedException();
+        }
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.mit.jwi.IDictionary#setCharset(java.nio.charset.Charset)
-	 */
-	public void setCharset(Charset charset)
-	{
-		backing.setCharset(charset);
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see edu.mit.jwi.ICachingDictionary#getCache()
+     */
+    public IItemCache getCache()
+    {
+        return cache;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.edu.mit.jwi.data.IHasCharset#getCharset()
-	 */
-	public Charset getCharset()
-	{
-		return backing.getCharset();
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see edu.mit.jwi.IDictionary#setCharset(java.nio.charset.Charset)
+     */
+    public void setCharset(Charset charset)
+    {
+        backing.setCharset(charset);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.mit.jwi.IHasLifecycle#open()
-	 */
-	public boolean open() throws IOException
-	{
-		if (isOpen())
-			return true;
-		cache.open();
-		return backing.open();
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see edu.edu.mit.jwi.data.IHasCharset#getCharset()
+     */
+    public Charset getCharset()
+    {
+        return backing.getCharset();
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.mit.jwi.IHasLifecycle#isOpen()
-	 */
-	public boolean isOpen()
-	{
-		return backing.isOpen();
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see edu.mit.jwi.IHasLifecycle#open()
+     */
+    public boolean open() throws IOException
+    {
+        if (isOpen())
+            return true;
+        cache.open();
+        return backing.open();
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.mit.jwi.IClosable#close()
-	 */
-	public void close()
-	{
-		if (!isOpen())
-			return;
-		getCache().close();
-		backing.close();
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see edu.mit.jwi.IHasLifecycle#isOpen()
+     */
+    public boolean isOpen()
+    {
+        return backing.isOpen();
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.edu.mit.jwi.item.IHasVersion#getVersion()
-	 */
-	public IVersion getVersion()
-	{
-		return backing.getVersion();
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see edu.mit.jwi.IClosable#close()
+     */
+    public void close()
+    {
+        if (!isOpen())
+            return;
+        getCache().close();
+        backing.close();
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.mit.jwi.IDictionary#getIndexWord(java.lang.String, edu.edu.mit.jwi.item.POS)
-	 */
-	public IIndexWord getIndexWord(String lemma, POS pos)
-	{
-		checkOpen();
-		IIndexWordID id = new IndexWordID(lemma, pos);
-		IIndexWord item = getCache().retrieveItem(id);
-		if (item == null)
-		{
-			item = backing.getIndexWord(id);
-			if (item != null)
-				getCache().cacheItem(item);
-		}
-		return item;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see edu.edu.mit.jwi.item.IHasVersion#getVersion()
+     */
+    public IVersion getVersion()
+    {
+        return backing.getVersion();
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.mit.jwi.IDictionary#getIndexWord(edu.edu.mit.jwi.item.IIndexWordID)
-	 */
-	public IIndexWord getIndexWord(IIndexWordID id)
-	{
-		checkOpen();
-		IIndexWord item = getCache().retrieveItem(id);
-		if (item == null)
-		{
-			item = backing.getIndexWord(id);
-			if (item != null)
-				getCache().cacheItem(item);
-		}
-		return item;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see edu.mit.jwi.IDictionary#getIndexWord(java.lang.String, edu.edu.mit.jwi.item.POS)
+     */
+    public IIndexWord getIndexWord(String lemma, POS pos)
+    {
+        checkOpen();
+        IIndexWordID id = new IndexWordID(lemma, pos);
+        IIndexWord item = getCache().retrieveItem(id);
+        if (item == null)
+        {
+            item = backing.getIndexWord(id);
+            if (item != null)
+                getCache().cacheItem(item);
+        }
+        return item;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.mit.jwi.IDictionary#getIndexWordIterator(edu.edu.mit.jwi.item.POS)
-	 */
-	public Iterator<IIndexWord> getIndexWordIterator(POS pos)
-	{
-		return backing.getIndexWordIterator(pos);
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see edu.mit.jwi.IDictionary#getIndexWord(edu.edu.mit.jwi.item.IIndexWordID)
+     */
+    public IIndexWord getIndexWord(IIndexWordID id)
+    {
+        checkOpen();
+        IIndexWord item = getCache().retrieveItem(id);
+        if (item == null)
+        {
+            item = backing.getIndexWord(id);
+            if (item != null)
+                getCache().cacheItem(item);
+        }
+        return item;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.mit.jwi.IDictionary#getWord(edu.edu.mit.jwi.item.IWordID)
-	 */
-	public IWord getWord(IWordID id)
-	{
-		checkOpen();
-		IWord item = getCache().retrieveItem(id);
-		if (item == null)
-		{
-			item = backing.getWord(id);
-			if (item != null)
-				cacheSynset(item.getSynset());
-		}
-		return item;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see edu.mit.jwi.IDictionary#getIndexWordIterator(edu.edu.mit.jwi.item.POS)
+     */
+    public Iterator<IIndexWord> getIndexWordIterator(POS pos)
+    {
+        return backing.getIndexWordIterator(pos);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.mit.jwi.IDictionary#getWord(edu.edu.mit.jwi.item.ISenseKey)
-	 */
-	public IWord getWord(ISenseKey key)
-	{
-		checkOpen();
-		IWord item = getCache().retrieveWord(key);
-		if (item == null)
-		{
-			item = backing.getWord(key);
-			if (item != null)
-				cacheSynset(item.getSynset());
-		}
-		return item;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see edu.mit.jwi.IDictionary#getWord(edu.edu.mit.jwi.item.IWordID)
+     */
+    public IWord getWord(IWordID id)
+    {
+        checkOpen();
+        IWord item = getCache().retrieveItem(id);
+        if (item == null)
+        {
+            item = backing.getWord(id);
+            if (item != null)
+                cacheSynset(item.getSynset());
+        }
+        return item;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.mit.jwi.IDictionary#getSynset(edu.edu.mit.jwi.item.ISynsetID)
-	 */
-	public ISynset getSynset(ISynsetID id)
-	{
-		checkOpen();
-		ISynset item = getCache().retrieveItem(id);
-		if (item == null)
-		{
-			item = backing.getSynset(id);
-			if (item != null)
-				cacheSynset(item);
-		}
-		return item;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see edu.mit.jwi.IDictionary#getWord(edu.edu.mit.jwi.item.ISenseKey)
+     */
+    public IWord getWord(ISenseKey key)
+    {
+        checkOpen();
+        IWord item = getCache().retrieveWord(key);
+        if (item == null)
+        {
+            item = backing.getWord(key);
+            if (item != null)
+                cacheSynset(item.getSynset());
+        }
+        return item;
+    }
 
-	/**
-	 * Caches the specified synset and its words.
-	 *
-	 * @param synset the synset to be cached; may not be <code>null</code>
-	 * @throws NullPointerException if the specified synset is <code>null</code>
-	 * @since JWI 2.2.0
-	 */
-	protected void cacheSynset(ISynset synset)
-	{
-		IItemCache cache = getCache();
-		cache.cacheItem(synset);
-		for (IWord word : synset.getWords())
-		{
-			cache.cacheItem(word);
-			cache.cacheWordByKey(word);
-		}
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see edu.mit.jwi.IDictionary#getSynset(edu.edu.mit.jwi.item.ISynsetID)
+     */
+    public ISynset getSynset(ISynsetID id)
+    {
+        checkOpen();
+        ISynset item = getCache().retrieveItem(id);
+        if (item == null)
+        {
+            item = backing.getSynset(id);
+            if (item != null)
+                cacheSynset(item);
+        }
+        return item;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.mit.jwi.IDictionary#getSynsetIterator(edu.edu.mit.jwi.item.POS)
-	 */
-	public Iterator<ISynset> getSynsetIterator(POS pos)
-	{
-		return backing.getSynsetIterator(pos);
-	}
+    /**
+     * Caches the specified synset and its words.
+     *
+     * @param synset the synset to be cached; may not be <code>null</code>
+     * @throws NullPointerException if the specified synset is <code>null</code>
+     * @since JWI 2.2.0
+     */
+    protected void cacheSynset(ISynset synset)
+    {
+        IItemCache cache = getCache();
+        cache.cacheItem(synset);
+        for (IWord word : synset.getWords())
+        {
+            cache.cacheItem(word);
+            cache.cacheWordByKey(word);
+        }
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.mit.jwi.IDictionary#getSenseEntry(edu.edu.mit.jwi.item.ISenseKey)
-	 */
-	public ISenseEntry getSenseEntry(ISenseKey key)
-	{
-		checkOpen();
-		ISenseEntry entry = getCache().retrieveSenseEntry(key);
-		if (entry == null)
-		{
-			entry = backing.getSenseEntry(key);
-			if (entry != null)
-				getCache().cacheSenseEntry(entry);
-		}
-		return entry;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see edu.mit.jwi.IDictionary#getSynsetIterator(edu.edu.mit.jwi.item.POS)
+     */
+    public Iterator<ISynset> getSynsetIterator(POS pos)
+    {
+        return backing.getSynsetIterator(pos);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.mit.jwi.IDictionary#getSenseEntryIterator()
-	 */
-	public Iterator<ISenseEntry> getSenseEntryIterator()
-	{
-		return backing.getSenseEntryIterator();
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see edu.mit.jwi.IDictionary#getSenseEntry(edu.edu.mit.jwi.item.ISenseKey)
+     */
+    public ISenseEntry getSenseEntry(ISenseKey key)
+    {
+        checkOpen();
+        ISenseEntry entry = getCache().retrieveSenseEntry(key);
+        if (entry == null)
+        {
+            entry = backing.getSenseEntry(key);
+            if (entry != null)
+                getCache().cacheSenseEntry(entry);
+        }
+        return entry;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.mit.jwi.IDictionary#getExceptionEntry(java.lang.String, edu.edu.mit.jwi.item.POS)
-	 */
-	public IExceptionEntry getExceptionEntry(String surfaceForm, POS pos)
-	{
-		checkOpen();
-		IExceptionEntryID id = new ExceptionEntryID(surfaceForm, pos);
-		IExceptionEntry item = getCache().retrieveItem(id);
-		if (item == null)
-		{
-			item = backing.getExceptionEntry(id);
-			if (item != null)
-				getCache().cacheItem(item);
-		}
-		return item;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see edu.mit.jwi.IDictionary#getSenseEntryIterator()
+     */
+    public Iterator<ISenseEntry> getSenseEntryIterator()
+    {
+        return backing.getSenseEntryIterator();
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.mit.jwi.IDictionary#getExceptionEntry(edu.edu.mit.jwi.item.IExceptionEntryID)
-	 */
-	public IExceptionEntry getExceptionEntry(IExceptionEntryID id)
-	{
-		checkOpen();
-		IExceptionEntry item = getCache().retrieveItem(id);
-		if (item == null)
-		{
-			item = backing.getExceptionEntry(id);
-			if (item != null)
-				getCache().cacheItem(item);
-		}
-		return item;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see edu.mit.jwi.IDictionary#getExceptionEntry(java.lang.String, edu.edu.mit.jwi.item.POS)
+     */
+    public IExceptionEntry getExceptionEntry(String surfaceForm, POS pos)
+    {
+        checkOpen();
+        IExceptionEntryID id = new ExceptionEntryID(surfaceForm, pos);
+        IExceptionEntry item = getCache().retrieveItem(id);
+        if (item == null)
+        {
+            item = backing.getExceptionEntry(id);
+            if (item != null)
+                getCache().cacheItem(item);
+        }
+        return item;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.mit.jwi.IDictionary#getExceptionEntryIterator(edu.edu.mit.jwi.item.POS)
-	 */
-	public Iterator<IExceptionEntry> getExceptionEntryIterator(POS pos)
-	{
-		return backing.getExceptionEntryIterator(pos);
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see edu.mit.jwi.IDictionary#getExceptionEntry(edu.edu.mit.jwi.item.IExceptionEntryID)
+     */
+    public IExceptionEntry getExceptionEntry(IExceptionEntryID id)
+    {
+        checkOpen();
+        IExceptionEntry item = getCache().retrieveItem(id);
+        if (item == null)
+        {
+            item = backing.getExceptionEntry(id);
+            if (item != null)
+                getCache().cacheItem(item);
+        }
+        return item;
+    }
 
-	/**
-	 * An LRU cache for objects in JWI.
-	 *
-	 * @author Mark A. Finlayson
-	 * @version 2.4.0
-	 * @since JWI 2.2.0
-	 */
-	public static class ItemCache implements IItemCache
-	{
-		// default configuration
-		public static final int DEFAULT_INITIAL_CAPACITY = 16;
-		public static final int DEFAULT_MAXIMUM_CAPACITY = 512;
-		public static final float DEFAULT_LOAD_FACTOR = 0.75f;
+    /*
+     * (non-Javadoc)
+     *
+     * @see edu.mit.jwi.IDictionary#getExceptionEntryIterator(edu.edu.mit.jwi.item.POS)
+     */
+    public Iterator<IExceptionEntry> getExceptionEntryIterator(POS pos)
+    {
+        return backing.getExceptionEntryIterator(pos);
+    }
 
-		protected final Lock lifecycleLock = new ReentrantLock();
+    /**
+     * An LRU cache for objects in JWI.
+     *
+     * @author Mark A. Finlayson
+     * @version 2.4.0
+     * @since JWI 2.2.0
+     */
+    public static class ItemCache implements IItemCache
+    {
+        // default configuration
+        public static final int DEFAULT_INITIAL_CAPACITY = 16;
+        public static final int DEFAULT_MAXIMUM_CAPACITY = 512;
+        public static final float DEFAULT_LOAD_FACTOR = 0.75f;
 
-		/**
-		 * Flag that records whether caching is enabled for this dictionary. Default
-		 * starting state is <code>true</code>.
-		 */
-		private boolean isEnabled = true;
+        protected final Lock lifecycleLock = new ReentrantLock();
 
-		/**
-		 * Initial capacity of the caches. If this is set to less than one, then
-		 * the system default is used.
-		 */
-		private int initialCapacity;
+        /**
+         * Flag that records whether caching is enabled for this dictionary. Default
+         * starting state is <code>true</code>.
+         */
+        private boolean isEnabled = true;
 
-		/**
-		 * Maximum capacity of the caches. If this is set to less than one, then
-		 * the cache size is unlimited.
-		 */
-		private int maximumCapacity;
+        /**
+         * Initial capacity of the caches. If this is set to less than one, then
+         * the system default is used.
+         */
+        private int initialCapacity;
 
-		// The caches themselves
-		protected Map<IItemID<?>, IItem<?>> itemCache;
-		protected Map<ISenseKey, IWord> keyCache;
-		protected Map<ISenseKey, ISenseEntry> senseCache;
+        /**
+         * Maximum capacity of the caches. If this is set to less than one, then
+         * the cache size is unlimited.
+         */
+        private int maximumCapacity;
 
-		/**
-		 * Default constructor that initializes the dictionary with caching enabled.
-		 *
-		 * @since JWI 2.2.0
-		 */
-		public ItemCache()
-		{
-			this(DEFAULT_INITIAL_CAPACITY, DEFAULT_MAXIMUM_CAPACITY, true);
-		}
+        // The caches themselves
+        protected Map<IItemID<?>, IItem<?>> itemCache;
+        protected Map<ISenseKey, IWord> keyCache;
+        protected Map<ISenseKey, ISenseEntry> senseCache;
 
-		/**
-		 * Caller can specify both the initial size, maximum size, and the
-		 * initial state of caching.
-		 *
-		 * @param initialCapacity the initial capacity of the cache
-		 * @param maxCapacity     the maximum capacity of the cache
-		 * @param enabled         whether the cache starts out enabled
-		 * @since JWI 2.2.0
-		 */
-		public ItemCache(int initialCapacity, int maxCapacity, boolean enabled)
-		{
-			setInitialCapacity(initialCapacity);
-			setMaximumCapacity(maxCapacity);
-			setEnabled(enabled);
-		}
+        /**
+         * Default constructor that initializes the dictionary with caching enabled.
+         *
+         * @since JWI 2.2.0
+         */
+        public ItemCache()
+        {
+            this(DEFAULT_INITIAL_CAPACITY, DEFAULT_MAXIMUM_CAPACITY, true);
+        }
 
-		/*
-		 * (non-Javadoc)
-		 *
-		 * @see edu.edu.mit.jwi.data.IHasLifecycle#open()
-		 */
-		public boolean open()
-		{
-			if (isOpen())
-				return true;
-			try
-			{
-				lifecycleLock.lock();
-				int capacity = (initialCapacity < 1) ? DEFAULT_INITIAL_CAPACITY : initialCapacity;
-				itemCache = this.makeCache(capacity);
-				keyCache = this.makeCache(capacity);
-				senseCache = this.makeCache(capacity);
-			}
-			finally
-			{
-				lifecycleLock.unlock();
-			}
-			return true;
-		}
+        /**
+         * Caller can specify both the initial size, maximum size, and the
+         * initial state of caching.
+         *
+         * @param initialCapacity the initial capacity of the cache
+         * @param maxCapacity     the maximum capacity of the cache
+         * @param enabled         whether the cache starts out enabled
+         * @since JWI 2.2.0
+         */
+        public ItemCache(int initialCapacity, int maxCapacity, boolean enabled)
+        {
+            setInitialCapacity(initialCapacity);
+            setMaximumCapacity(maxCapacity);
+            setEnabled(enabled);
+        }
 
-		/**
-		 * Creates the map that backs this cache.
-		 *
-		 * @param <K>             the key type
-		 * @param <V>             the value type
-		 * @param initialCapacity the initial capacity
-		 * @return the new map
-		 * @since JWI 2.2.0
-		 */
-		protected <K, V> Map<K, V> makeCache(int initialCapacity)
-		{
-			return new LinkedHashMap<>(initialCapacity, DEFAULT_LOAD_FACTOR, true);
-		}
+        /*
+         * (non-Javadoc)
+         *
+         * @see edu.edu.mit.jwi.data.IHasLifecycle#open()
+         */
+        public boolean open()
+        {
+            if (isOpen())
+                return true;
+            try
+            {
+                lifecycleLock.lock();
+                int capacity = (initialCapacity < 1) ? DEFAULT_INITIAL_CAPACITY : initialCapacity;
+                itemCache = this.makeCache(capacity);
+                keyCache = this.makeCache(capacity);
+                senseCache = this.makeCache(capacity);
+            }
+            finally
+            {
+                lifecycleLock.unlock();
+            }
+            return true;
+        }
 
-		/*
-		 * (non-Javadoc)
-		 *
-		 * @see edu.edu.mit.jwi.data.IHasLifecycle#isOpen()
-		 */
-		public boolean isOpen()
-		{
-			return senseCache != null;
-		}
+        /**
+         * Creates the map that backs this cache.
+         *
+         * @param <K>             the key type
+         * @param <V>             the value type
+         * @param initialCapacity the initial capacity
+         * @return the new map
+         * @since JWI 2.2.0
+         */
+        protected <K, V> Map<K, V> makeCache(int initialCapacity)
+        {
+            return new LinkedHashMap<>(initialCapacity, DEFAULT_LOAD_FACTOR, true);
+        }
 
-		/**
-		 * An internal method for assuring compliance with the dictionary
-		 * interface that says that methods will throw
-		 * {@code ObjectClosedException}s if the dictionary has not yet been
-		 * opened.
-		 *
-		 * @throws ObjectClosedException if the dictionary is closed.
-		 * @since JWI 2.2.0
-		 */
-		protected void checkOpen()
-		{
-			if (!isOpen())
-				throw new ObjectClosedException();
-		}
+        /*
+         * (non-Javadoc)
+         *
+         * @see edu.edu.mit.jwi.data.IHasLifecycle#isOpen()
+         */
+        public boolean isOpen()
+        {
+            return senseCache != null;
+        }
 
-		/*
-		 * (non-Javadoc)
-		 *
-		 * @see edu.edu.mit.jwi.data.IClosable#close()
-		 */
-		public void close()
-		{
-			if (!isOpen())
-				return;
-			try
-			{
-				lifecycleLock.lock();
-				itemCache = null;
-				keyCache = null;
-				senseCache = null;
-			}
-			finally
-			{
-				lifecycleLock.unlock();
-			}
-		}
+        /**
+         * An internal method for assuring compliance with the dictionary
+         * interface that says that methods will throw
+         * {@code ObjectClosedException}s if the dictionary has not yet been
+         * opened.
+         *
+         * @throws ObjectClosedException if the dictionary is closed.
+         * @since JWI 2.2.0
+         */
+        protected void checkOpen()
+        {
+            if (!isOpen())
+                throw new ObjectClosedException();
+        }
 
-		/*
-		 * (non-Javadoc)
-		 *
-		 * @see edu.mit.jwi.ICachingDictionary.IItemCache#clear()
-		 */
-		public void clear()
-		{
-			if (itemCache != null)
-				itemCache.clear();
-			if (keyCache != null)
-				keyCache.clear();
-			if (senseCache != null)
-				senseCache.clear();
-		}
+        /*
+         * (non-Javadoc)
+         *
+         * @see edu.edu.mit.jwi.data.IClosable#close()
+         */
+        public void close()
+        {
+            if (!isOpen())
+                return;
+            try
+            {
+                lifecycleLock.lock();
+                itemCache = null;
+                keyCache = null;
+                senseCache = null;
+            }
+            finally
+            {
+                lifecycleLock.unlock();
+            }
+        }
 
-		/*
-		 * (non-Javadoc)
-		 *
-		 * @see edu.mit.jwi.ICachingDictionary.IItemCache#isEnabled()
-		 */
-		public boolean isEnabled()
-		{
-			return isEnabled;
-		}
+        /*
+         * (non-Javadoc)
+         *
+         * @see edu.mit.jwi.ICachingDictionary.IItemCache#clear()
+         */
+        public void clear()
+        {
+            if (itemCache != null)
+                itemCache.clear();
+            if (keyCache != null)
+                keyCache.clear();
+            if (senseCache != null)
+                senseCache.clear();
+        }
 
-		/*
-		 * (non-Javadoc)
-		 *
-		 * @see edu.mit.jwi.ICachingDictionary.IItemCache#setEnabled(boolean)
-		 */
-		public void setEnabled(boolean isEnabled)
-		{
-			this.isEnabled = isEnabled;
-		}
+        /*
+         * (non-Javadoc)
+         *
+         * @see edu.mit.jwi.ICachingDictionary.IItemCache#isEnabled()
+         */
+        public boolean isEnabled()
+        {
+            return isEnabled;
+        }
 
-		/**
-		 * Returns the initial capacity of this cache.
-		 *
-		 * @return the initial capacity of this cache.
-		 * @since JWI 2.2.0
-		 */
-		public int getInitialCapacity()
-		{
-			return initialCapacity;
-		}
+        /*
+         * (non-Javadoc)
+         *
+         * @see edu.mit.jwi.ICachingDictionary.IItemCache#setEnabled(boolean)
+         */
+        public void setEnabled(boolean isEnabled)
+        {
+            this.isEnabled = isEnabled;
+        }
 
-		/**
-		 * Sets the initial capacity of the cache
-		 *
-		 * @param capacity the initial capacity
-		 * @since JWI 2.2.0
-		 */
-		public void setInitialCapacity(int capacity)
-		{
-			initialCapacity = capacity < 1 ? DEFAULT_INITIAL_CAPACITY : capacity;
-		}
+        /**
+         * Returns the initial capacity of this cache.
+         *
+         * @return the initial capacity of this cache.
+         * @since JWI 2.2.0
+         */
+        public int getInitialCapacity()
+        {
+            return initialCapacity;
+        }
 
-		/*
-		 * (non-Javadoc)
-		 *
-		 * @see edu.mit.jwi.ICachingDictionary.IItemCache#getMaximumCapacity()
-		 */
-		public int getMaximumCapacity()
-		{
-			return maximumCapacity;
-		}
+        /**
+         * Sets the initial capacity of the cache
+         *
+         * @param capacity the initial capacity
+         * @since JWI 2.2.0
+         */
+        public void setInitialCapacity(int capacity)
+        {
+            initialCapacity = capacity < 1 ? DEFAULT_INITIAL_CAPACITY : capacity;
+        }
 
-		/*
-		 * (non-Javadoc)
-		 *
-		 * @see edu.mit.jwi.ICachingDictionary.IItemCache#setMaximumCapacity(int)
-		 */
-		public void setMaximumCapacity(int capacity)
-		{
-			int oldCapacity = maximumCapacity;
-			maximumCapacity = capacity;
-			if (maximumCapacity < 1 || oldCapacity <= maximumCapacity)
-				return;
-			reduceCacheSize(itemCache);
-			reduceCacheSize(keyCache);
-			reduceCacheSize(senseCache);
-		}
+        /*
+         * (non-Javadoc)
+         *
+         * @see edu.mit.jwi.ICachingDictionary.IItemCache#getMaximumCapacity()
+         */
+        public int getMaximumCapacity()
+        {
+            return maximumCapacity;
+        }
 
-		/*
-		 * (non-Javadoc)
-		 *
-		 * @see edu.mit.jwi.ICachingDictionary.IItemCache#size()
-		 */
-		public int size()
-		{
-			checkOpen();
-			return itemCache.size() + keyCache.size() + senseCache.size();
-		}
+        /*
+         * (non-Javadoc)
+         *
+         * @see edu.mit.jwi.ICachingDictionary.IItemCache#setMaximumCapacity(int)
+         */
+        public void setMaximumCapacity(int capacity)
+        {
+            int oldCapacity = maximumCapacity;
+            maximumCapacity = capacity;
+            if (maximumCapacity < 1 || oldCapacity <= maximumCapacity)
+                return;
+            reduceCacheSize(itemCache);
+            reduceCacheSize(keyCache);
+            reduceCacheSize(senseCache);
+        }
 
-		/*
-		 * (non-Javadoc)
-		 *
-		 * @see edu.mit.jwi.ICachingDictionary.IItemCache#cacheItem(edu.edu.mit.jwi.item.IItem)
-		 */
-		public void cacheItem(IItem<?> item)
-		{
-			checkOpen();
-			if (!isEnabled())
-				return;
-			itemCache.put(item.getID(), item);
-			reduceCacheSize(itemCache);
-		}
+        /*
+         * (non-Javadoc)
+         *
+         * @see edu.mit.jwi.ICachingDictionary.IItemCache#size()
+         */
+        public int size()
+        {
+            checkOpen();
+            return itemCache.size() + keyCache.size() + senseCache.size();
+        }
 
-		/*
-		 * (non-Javadoc)
-		 *
-		 * @see edu.mit.jwi.ICachingDictionary.IItemCache#cacheWordByKey(edu.edu.mit.jwi.item.IWord)
-		 */
-		public void cacheWordByKey(IWord word)
-		{
-			checkOpen();
-			if (!isEnabled())
-				return;
-			keyCache.put(word.getSenseKey(), word);
-			reduceCacheSize(keyCache);
-		}
+        /*
+         * (non-Javadoc)
+         *
+         * @see edu.mit.jwi.ICachingDictionary.IItemCache#cacheItem(edu.edu.mit.jwi.item.IItem)
+         */
+        public void cacheItem(IItem<?> item)
+        {
+            checkOpen();
+            if (!isEnabled())
+                return;
+            itemCache.put(item.getID(), item);
+            reduceCacheSize(itemCache);
+        }
 
-		/*
-		 * (non-Javadoc)
-		 *
-		 * @see edu.mit.jwi.ICachingDictionary.IItemCache#cacheSenseEntry(edu.edu.mit.jwi.item.ISenseEntry)
-		 */
-		public void cacheSenseEntry(ISenseEntry entry)
-		{
-			checkOpen();
-			if (!isEnabled())
-				return;
-			senseCache.put(entry.getSenseKey(), entry);
-			reduceCacheSize(senseCache);
-		}
+        /*
+         * (non-Javadoc)
+         *
+         * @see edu.mit.jwi.ICachingDictionary.IItemCache#cacheWordByKey(edu.edu.mit.jwi.item.IWord)
+         */
+        public void cacheWordByKey(IWord word)
+        {
+            checkOpen();
+            if (!isEnabled())
+                return;
+            keyCache.put(word.getSenseKey(), word);
+            reduceCacheSize(keyCache);
+        }
 
-		private final Object cacheLock = new Object();
+        /*
+         * (non-Javadoc)
+         *
+         * @see edu.mit.jwi.ICachingDictionary.IItemCache#cacheSenseEntry(edu.edu.mit.jwi.item.ISenseEntry)
+         */
+        public void cacheSenseEntry(ISenseEntry entry)
+        {
+            checkOpen();
+            if (!isEnabled())
+                return;
+            senseCache.put(entry.getSenseKey(), entry);
+            reduceCacheSize(senseCache);
+        }
 
-		/**
-		 * Brings the map size into line with the specified maximum capacity of
-		 * this cache.
-		 *
-		 * @param cache the map to be trimmed
-		 * @since JWI 2.2.0
-		 */
-		protected void reduceCacheSize(Map<?, ?> cache)
-		{
-			if (!isOpen() || maximumCapacity < 1 || cache.size() < maximumCapacity)
-				return;
-			synchronized (cacheLock)
-			{
-				int remove = cache.size() - maximumCapacity;
-				Iterator<?> itr = cache.keySet().iterator();
-				for (int i = 0; i <= remove; i++)
-					if (itr.hasNext())
-					{
-						itr.next();
-						itr.remove();
-					}
-			}
-		}
+        private final Object cacheLock = new Object();
 
-		/*
-		 * (non-Javadoc)
-		 *
-		 * @see edu.mit.jwi.ICachingDictionary.IItemCache#retrieveItem(edu.edu.mit.jwi.item.IItemID)
-		 */
-		public <T extends IItem<D>, D extends IItemID<T>> T retrieveItem(D id)
-		{
-			checkOpen();
-			//noinspection unchecked
-			return (T) itemCache.get(id);
-		}
+        /**
+         * Brings the map size into line with the specified maximum capacity of
+         * this cache.
+         *
+         * @param cache the map to be trimmed
+         * @since JWI 2.2.0
+         */
+        protected void reduceCacheSize(Map<?, ?> cache)
+        {
+            if (!isOpen() || maximumCapacity < 1 || cache.size() < maximumCapacity)
+                return;
+            synchronized (cacheLock)
+            {
+                int remove = cache.size() - maximumCapacity;
+                Iterator<?> itr = cache.keySet().iterator();
+                for (int i = 0; i <= remove; i++)
+                    if (itr.hasNext())
+                    {
+                        itr.next();
+                        itr.remove();
+                    }
+            }
+        }
 
-		/*
-		 * (non-Javadoc)
-		 *
-		 * @see edu.mit.jwi.ICachingDictionary.IItemCache#retrieveWord(edu.edu.mit.jwi.item.ISenseKey)
-		 */
-		public IWord retrieveWord(ISenseKey key)
-		{
-			checkOpen();
-			return keyCache.get(key);
-		}
+        /*
+         * (non-Javadoc)
+         *
+         * @see edu.mit.jwi.ICachingDictionary.IItemCache#retrieveItem(edu.edu.mit.jwi.item.IItemID)
+         */
+        public <T extends IItem<D>, D extends IItemID<T>> T retrieveItem(D id)
+        {
+            checkOpen();
+            //noinspection unchecked
+            return (T) itemCache.get(id);
+        }
 
-		/*
-		 * (non-Javadoc)
-		 *
-		 * @see edu.mit.jwi.ICachingDictionary.IItemCache#retrieveSenseEntry(edu.edu.mit.jwi.item.ISenseKey)
-		 */
-		public ISenseEntry retrieveSenseEntry(ISenseKey key)
-		{
-			checkOpen();
-			return senseCache.get(key);
-		}
-	}
+        /*
+         * (non-Javadoc)
+         *
+         * @see edu.mit.jwi.ICachingDictionary.IItemCache#retrieveWord(edu.edu.mit.jwi.item.ISenseKey)
+         */
+        public IWord retrieveWord(ISenseKey key)
+        {
+            checkOpen();
+            return keyCache.get(key);
+        }
+
+        /*
+         * (non-Javadoc)
+         *
+         * @see edu.mit.jwi.ICachingDictionary.IItemCache#retrieveSenseEntry(edu.edu.mit.jwi.item.ISenseKey)
+         */
+        public ISenseEntry retrieveSenseEntry(ISenseKey key)
+        {
+            checkOpen();
+            return senseCache.get(key);
+        }
+    }
 }

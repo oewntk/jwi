@@ -22,12 +22,12 @@ package edu.mit.jwi.item;
 public interface ISynsetID extends IHasPOS, IItemID<ISynset>
 {
 
-	/**
-	 * Returns the offset for the specified synset.
-	 *
-	 * @return the byte offset for the specified synset
-	 * @since JWI 1.0
-	 */
-	int getOffset();
+    /**
+     * Returns the offset for the specified synset.
+     *
+     * @return the byte offset for the specified synset
+     * @since JWI 1.0
+     */
+    int getOffset();
 
 }

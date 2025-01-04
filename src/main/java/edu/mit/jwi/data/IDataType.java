@@ -40,33 +40,33 @@ import java.util.Set;
 public interface IDataType<T>
 {
 
-	/**
-	 * Returns the line parser that can be used to process lines of data
-	 * retrieved from an {@code IDataSource} file with this type.
-	 *
-	 * @return the line parser that can be used to process lines of data
-	 * retrieved from an {@code IDataSource} file with this type.
-	 * @since JWI 2.0.0
-	 */
-	ILineParser<T> getParser();
+    /**
+     * Returns the line parser that can be used to process lines of data
+     * retrieved from an {@code IDataSource} file with this type.
+     *
+     * @return the line parser that can be used to process lines of data
+     * retrieved from an {@code IDataSource} file with this type.
+     * @since JWI 2.0.0
+     */
+    ILineParser<T> getParser();
 
-	/**
-	 * Indicates whether this content type usually has wordnet version
-	 * information encoded in its header.
-	 *
-	 * @return <code>true</code> if the content file that underlies this content
-	 * usually has wordnet version information in its comment header;
-	 * <code>false</code> otherwise.
-	 * @since JWI 2.1.0
-	 */
-	boolean hasVersion();
+    /**
+     * Indicates whether this content type usually has wordnet version
+     * information encoded in its header.
+     *
+     * @return <code>true</code> if the content file that underlies this content
+     * usually has wordnet version information in its comment header;
+     * <code>false</code> otherwise.
+     * @since JWI 2.1.0
+     */
+    boolean hasVersion();
 
-	/**
-	 * Returns an immutable set of strings that can be used as keywords to
-	 * identify resources that are of this type.
-	 *
-	 * @return a set of resource name fragments
-	 * @since JWI 2.0.0
-	 */
-	Set<String> getResourceNameHints();
+    /**
+     * Returns an immutable set of strings that can be used as keywords to
+     * identify resources that are of this type.
+     *
+     * @return a set of resource name fragments
+     * @since JWI 2.0.0
+     */
+    Set<String> getResourceNameHints();
 }

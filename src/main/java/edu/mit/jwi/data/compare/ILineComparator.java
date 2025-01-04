@@ -25,14 +25,14 @@ import java.util.Comparator;
 public interface ILineComparator extends Comparator<String>
 {
 
-	/**
-	 * Returns the comment detector instance associated with this line
-	 * comparator, or <code>null</code> if one does not exist.
-	 *
-	 * @return the comment detector associated with this line comparator, or
-	 * <code>null</code> if there is none
-	 * @since JWI 2.0.0
-	 */
-	ICommentDetector getCommentDetector();
+    /**
+     * Returns the comment detector instance associated with this line
+     * comparator, or <code>null</code> if one does not exist.
+     *
+     * @return the comment detector associated with this line comparator, or
+     * <code>null</code> if there is none
+     * @since JWI 2.0.0
+     */
+    ICommentDetector getCommentDetector();
 
 }

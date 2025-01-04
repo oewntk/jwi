@@ -23,22 +23,22 @@ import java.io.Serializable;
 public interface IPointer extends Serializable
 {
 
-	/**
-	 * The symbol in the Wordnet data files that is used to indicate this
-	 * pointer type. Will not be <code>null</code>, empty, or all whitespace.
-	 *
-	 * @return the symbol for this pointer
-	 * @since JWI 2.0.0
-	 */
-	String getSymbol();
+    /**
+     * The symbol in the Wordnet data files that is used to indicate this
+     * pointer type. Will not be <code>null</code>, empty, or all whitespace.
+     *
+     * @return the symbol for this pointer
+     * @since JWI 2.0.0
+     */
+    String getSymbol();
 
-	/**
-	 * Returns a user-friendly name of this pointer type for identification
-	 * purposes. Will not be <code>null</code>, empty, or all whitespace.
-	 *
-	 * @return the user-friendly name of this pointer
-	 * @since JWI 2.0.0
-	 */
-	String getName();
+    /**
+     * Returns a user-friendly name of this pointer type for identification
+     * purposes. Will not be <code>null</code>, empty, or all whitespace.
+     *
+     * @return the user-friendly name of this pointer
+     * @since JWI 2.0.0
+     */
+    String getName();
 
 }

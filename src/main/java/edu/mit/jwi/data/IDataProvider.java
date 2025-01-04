@@ -30,81 +30,81 @@ import java.util.Set;
 public interface IDataProvider extends IHasVersion, IHasLifecycle, IHasCharset
 {
 
-	/**
-	 * This method is used to set the source URL from which the provider
-	 * accesses the data from which it instantiates data sources. The data at
-	 * the specified location may be in an implementation-specific format. If
-	 * the provider is currently open, this method throws an
-	 * {@code IllegalStateException}.
-	 *
-	 * @param url the location of the data, may not be <code>null</code>
-	 * @throws IllegalStateException if the provider is currently open
-	 * @throws NullPointerException  if the specified <code>URL</code> is <code>null</code>.
-	 * @since JWI 1.0
-	 */
-	void setSource(URL url);
+    /**
+     * This method is used to set the source URL from which the provider
+     * accesses the data from which it instantiates data sources. The data at
+     * the specified location may be in an implementation-specific format. If
+     * the provider is currently open, this method throws an
+     * {@code IllegalStateException}.
+     *
+     * @param url the location of the data, may not be <code>null</code>
+     * @throws IllegalStateException if the provider is currently open
+     * @throws NullPointerException  if the specified <code>URL</code> is <code>null</code>.
+     * @since JWI 1.0
+     */
+    void setSource(URL url);
 
-	/**
-	 * Returns the <code>URL</code> that points to the resource location; should
-	 * never return <code>null</code>.
-	 *
-	 * @return the<code>URL</code> that points to the resource location; must
-	 * not be <code>null</code>
-	 * @since JWI 1.0
-	 */
-	URL getSource();
+    /**
+     * Returns the <code>URL</code> that points to the resource location; should
+     * never return <code>null</code>.
+     *
+     * @return the<code>URL</code> that points to the resource location; must
+     * not be <code>null</code>
+     * @since JWI 1.0
+     */
+    URL getSource();
 
-	/**
-	 * Sets the character set associated with this dictionary. The character set
-	 * may be <code>null</code>.
-	 *
-	 * @param charset the possibly <code>null</code> character set to use when
-	 *                decoding files.
-	 * @throws IllegalStateException if the provider is currently open
-	 * @since JWI 2.3.4
-	 */
-	void setCharset(Charset charset);
+    /**
+     * Sets the character set associated with this dictionary. The character set
+     * may be <code>null</code>.
+     *
+     * @param charset the possibly <code>null</code> character set to use when
+     *                decoding files.
+     * @throws IllegalStateException if the provider is currently open
+     * @since JWI 2.3.4
+     */
+    void setCharset(Charset charset);
 
-	/**
-	 * Returns a set containing all the content types this provider looks for at
-	 * the resource location. The returned collection may be unmodifiable, or
-	 * may be a copy of an internal array; in any event modification of the
-	 * returned collection should not affect the set of types used by the
-	 * provider.
-	 *
-	 * @return a non-<code>null</code>, non-empty set of content types for this
-	 * provider
-	 * @since JWI 2.2.0
-	 */
-	Set<? extends IContentType<?>> getTypes();
+    /**
+     * Returns a set containing all the content types this provider looks for at
+     * the resource location. The returned collection may be unmodifiable, or
+     * may be a copy of an internal array; in any event modification of the
+     * returned collection should not affect the set of types used by the
+     * provider.
+     *
+     * @return a non-<code>null</code>, non-empty set of content types for this
+     * provider
+     * @since JWI 2.2.0
+     */
+    Set<? extends IContentType<?>> getTypes();
 
-	/**
-	 * Returns the first content type, if any, that matches the specified data
-	 * type and pos object. Either parameter may be <code>null</code>.
-	 *
-	 * @param dt  the data type, possibly <code>null</code>, of the desired
-	 *            content type
-	 * @param pos the part of speech, possibly <code>null</code>, of the desired
-	 *            content type
-	 * @param <T> type
-	 * @return the first content type that matches the specified data type and
-	 * part of speech.
-	 * @since JWI 2.3.4
-	 */
-	<T> IContentType<T> resolveContentType(IDataType<T> dt, POS pos);
+    /**
+     * Returns the first content type, if any, that matches the specified data
+     * type and pos object. Either parameter may be <code>null</code>.
+     *
+     * @param dt  the data type, possibly <code>null</code>, of the desired
+     *            content type
+     * @param pos the part of speech, possibly <code>null</code>, of the desired
+     *            content type
+     * @param <T> type
+     * @return the first content type that matches the specified data type and
+     * part of speech.
+     * @since JWI 2.3.4
+     */
+    <T> IContentType<T> resolveContentType(IDataType<T> dt, POS pos);
 
-	/**
-	 * Returns a data source object for the specified content type, if one is
-	 * available; otherwise returns <code>null</code>.
-	 *
-	 * @param <T>  the content type of the data source
-	 * @param type the content type of the data source to be retrieved
-	 * @return the data source for the specified content type, or
-	 * <code>null</code> if this provider has no such data source
-	 * @throws NullPointerException  if the type is <code>null</code>
-	 * @throws ObjectClosedException if the provider is not open when this call is made
-	 * @since JWI 2.0.0
-	 */
-	<T> IDataSource<T> getSource(IContentType<T> type);
+    /**
+     * Returns a data source object for the specified content type, if one is
+     * available; otherwise returns <code>null</code>.
+     *
+     * @param <T>  the content type of the data source
+     * @param type the content type of the data source to be retrieved
+     * @return the data source for the specified content type, or
+     * <code>null</code> if this provider has no such data source
+     * @throws NullPointerException  if the type is <code>null</code>
+     * @throws ObjectClosedException if the provider is not open when this call is made
+     * @since JWI 2.0.0
+     */
+    <T> IDataSource<T> getSource(IContentType<T> type);
 
 }

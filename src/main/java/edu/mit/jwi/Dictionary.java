@@ -27,30 +27,30 @@ import java.net.URL;
 public class Dictionary extends CachingDictionary
 {
 
-	/**
-	 * Constructs a new dictionary that uses the Wordnet files located in a
-	 * directory pointed to by the specified url
-	 *
-	 * @param wordnetDir a url pointing to a directory containing the wordnet data
-	 *                   files on the filesystem
-	 * @throws NullPointerException if the specified url is <code>null</code>
-	 * @since JWI 1.0
-	 */
-	public Dictionary(URL wordnetDir)
-	{
-		super(new DataSourceDictionary(new FileProvider(wordnetDir)));
-	}
+    /**
+     * Constructs a new dictionary that uses the Wordnet files located in a
+     * directory pointed to by the specified url
+     *
+     * @param wordnetDir an url pointing to a directory containing the wordnet data
+     *                   files on the filesystem
+     * @throws NullPointerException if the specified url is <code>null</code>
+     * @since JWI 1.0
+     */
+    public Dictionary(URL wordnetDir)
+    {
+        super(new DataSourceDictionary(new FileProvider(wordnetDir)));
+    }
 
-	/**
-	 * Constructs a new dictionary that uses the Wordnet files located in a
-	 * directory pointed to by the specified file
-	 *
-	 * @param wordnetDir a file pointing to a directory containing the wordnet data files on the filesystem
-	 * @throws NullPointerException if the specified file is <code>null</code>
-	 * @since JWI 1.0
-	 */
-	public Dictionary(File wordnetDir)
-	{
-		super(new DataSourceDictionary(new FileProvider(wordnetDir)));
-	}
+    /**
+     * Constructs a new dictionary that uses the Wordnet files located in a
+     * directory pointed to by the specified file
+     *
+     * @param wordnetDir a file pointing to a directory containing the wordnet data files on the filesystem
+     * @throws NullPointerException if the specified file is <code>null</code>
+     * @since JWI 1.0
+     */
+    public Dictionary(File wordnetDir)
+    {
+        super(new DataSourceDictionary(new FileProvider(wordnetDir)));
+    }
 }
