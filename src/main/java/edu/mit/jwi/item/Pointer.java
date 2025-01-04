@@ -27,7 +27,6 @@ import java.util.*;
  */
 public class Pointer implements IPointer
 {
-
 	/**
 	 * This serial version UID identifies the last version of JWI whose
 	 * serialized instances of the Pointer class are compatible with this
@@ -68,6 +67,7 @@ public class Pointer implements IPointer
 	public static final Pointer VERB_GROUP = new Pointer("$", "Verb Group");
 	public static final Pointer IS_CAUSED = new Pointer(">^", "Is caused by");
 	public static final Pointer IS_ENTAILED = new Pointer("*^", "Is entailed by");
+	public static final Pointer COLLOCATION = new Pointer("`", "Collocation");
 
 	// final instance fields
 	private final String symbol;
